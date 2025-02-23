@@ -1,4 +1,5 @@
 object DynamicProgramming {
+  // https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/712/dynamic-programming/4580/
   def climbingStairs(input: Int): Int = {
     if (input <= 2) input
     else {
@@ -10,5 +11,16 @@ object DynamicProgramming {
       }
       mem(input)
     }
+  }
+
+  // https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/712/dynamic-programming/4684/
+  def minCostClimbingStairs(input: Array[Int]): Int = {
+    val mem = new Array[Int](input.length + 1)
+    mem(0) = 0
+    mem(1) = 0
+    for (n <- 2 until input.length + 1) {
+      mem(n) = math.min(input(n - 1) + mem(n - 1), input(n - 2) + mem(n - 2))
+    }
+    mem.last
   }
 }
