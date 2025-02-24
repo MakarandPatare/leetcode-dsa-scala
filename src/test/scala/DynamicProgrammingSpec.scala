@@ -47,4 +47,27 @@ class DynamicProgrammingSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("coinChange") {
+    it("should return -1 for impossible solution") {
+      val inputCoins = Array(2)
+      val inputAmount = 3
+      val expected = -1
+      val output = DynamicProgramming.coinChange(inputCoins, inputAmount)
+      assert(output == expected)
+    }
+    it("should return 0 for amount 0") {
+      val inputCoins = Array(2, 3)
+      val inputAmount = 0
+      val expected = 0
+      val output = DynamicProgramming.coinChange(inputCoins, inputAmount)
+      assert(output == expected)
+    }
+    it("should return correct answer for normal input") {
+      val inputCoins = Array(1, 2, 5)
+      val inputAmount = 11
+      val expected = 3
+      val output = DynamicProgramming.coinChange(inputCoins, inputAmount)
+      assert(output == expected)
+    }
+  }
 }

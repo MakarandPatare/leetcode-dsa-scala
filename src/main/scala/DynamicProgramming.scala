@@ -23,4 +23,18 @@ object DynamicProgramming {
     }
     mem.last
   }
+
+  // https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/712/dynamic-programming/4581/
+  def coinChange(coins: Array[Int], amount: Int): Int = {
+    val dp = Array.fill(amount + 1)(amount + 1)
+    dp(0) = 0
+    for (n <- 1 to amount) {
+      for (coin <- coins) {
+        if (coin <= n) {
+          dp(n) = math.min(dp(n), dp(n - coin) + 1)
+        }
+      }
+    }
+    if (dp(amount) > amount) -1 else dp(amount)
+  }
 }
