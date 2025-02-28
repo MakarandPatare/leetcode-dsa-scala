@@ -70,4 +70,24 @@ class DynamicProgrammingSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("longestCommonSubsequence") {
+    it("should return correct answer for normal input") {
+      val (ip1, ip2) = ("abcde", "ace")
+      val expected = 3
+      val output = DynamicProgramming.longestCommonSubsequence(ip1, ip2)
+      assert(output == expected)
+    }
+    it("should return correct answer for same inputs") {
+      val (ip1, ip2) = ("abc", "abc")
+      val expected = 3
+      val output = DynamicProgramming.longestCommonSubsequence(ip1, ip2)
+      assert(output == expected)
+    }
+    it("should return correct answer for non-common inputs") {
+      val (ip1, ip2) = ("abc", "def")
+      val expected = 0
+      val output = DynamicProgramming.longestCommonSubsequence(ip1, ip2)
+      assert(output == expected)
+    }
+  }
 }

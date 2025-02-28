@@ -37,4 +37,19 @@ object DynamicProgramming {
     }
     if (dp(amount) > amount) -1 else dp(amount)
   }
+  // https://leetcode.com/problems/longest-common-subsequence/
+  def longestCommonSubsequence(text1: String, text2: String): Int = {
+    if (text1.isEmpty || text2.isEmpty) return 0
+    val dp: Array[Array[Int]] = Array.ofDim(text1.length + 1, text2.length + 1)
+    dp(0)(0) = 0
+    for (i <- 1 to text1.length)
+      for (j <- 1 to text2.length) {
+        if (text1(i - 1) == text2(j - 1)) {
+          dp(i)(j) = 1 + dp(i - 1)(j - 1)
+        } else {
+          dp(i)(j) = math.max(dp(i)(j - 1), dp(i - 1)(j))
+        }
+      }
+    dp(text1.length)(text2.length)
+  }
 }
