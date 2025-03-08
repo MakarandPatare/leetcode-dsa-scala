@@ -90,4 +90,18 @@ class DynamicProgrammingSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("bestTimeToBuyAndSellStickIV") {
+    it("should return correct answer for normal input") {
+      val (k, prices) = (2, Array(2, 4, 1))
+      val expected = 2
+      val output = DynamicProgramming.bestTimeToBuyAndSellStickIV(k, prices)
+      assert(output == expected)
+    }
+    it("should return correct answer for longer input") {
+      val (k, prices) = (2, Array(3,2,6,5,0,3))
+      val expected = 7
+      val output = DynamicProgramming.bestTimeToBuyAndSellStickIV(k, prices)
+      assert(output == expected)
+    }
+  }
 }

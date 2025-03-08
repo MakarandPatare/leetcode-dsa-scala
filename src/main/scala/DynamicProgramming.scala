@@ -52,4 +52,23 @@ object DynamicProgramming {
       }
     dp(text1.length)(text2.length)
   }
+  // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/
+  def bestTimeToBuyAndSellStickIV(k: Int, prices: Array[Int]): Int = {
+    val n = prices.length
+    val dp: Array[Array[Array[Int]]] = Array.ofDim(n + 1, k + 1, 2)
+    for (day <- n - 1 to 0 by -1) {
+      for (remain <- k - 1 to 0 by -1) {
+        for (holding <- 0 to 1) {
+          val tempSol = dp(day + 1)(remain)(holding)
+          dp(day)(remain)(holding) =
+            if (holding == 0) {
+              Math.max(tempSol, - prices(day) + dp(day + 1)(remain)(1))
+            } else {
+              Math.max(tempSol, prices(day) + dp(day + 1)(remain + 1)(0))
+            }
+        }
+      }
+    }
+    dp(0)(0)(0)
+  }
 }
