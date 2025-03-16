@@ -59,4 +59,33 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("1448. goodNodes") {
+    it("should return correct output for case 1") {
+      val input = TreeNode(3,
+        _left = TreeNode(1,
+          _left = TreeNode(3)),
+        _right = TreeNode(4,
+          _left = TreeNode(1),
+          _right = TreeNode(5))
+      )
+      val expected = 4
+      val output = TreesAndGraphs.goodNodes(input)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val input = TreeNode(3,
+          _left = TreeNode(3,
+            _left = TreeNode(4),
+            _right = TreeNode(2)))
+      val expected = 3
+      val output = TreesAndGraphs.goodNodes(input)
+      assert(output == expected)
+    }
+    it("should return correct output for case 3") {
+      val input = TreeNode(1)
+      val expected = 1
+      val output = TreesAndGraphs.goodNodes(input)
+      assert(output == expected)
+    }
+  }
 }
