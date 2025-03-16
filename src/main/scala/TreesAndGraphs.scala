@@ -30,4 +30,10 @@ object TreesAndGraphs {
     if (root == null) 0
     else dfs(root, Int.MinValue)
   }
+  // https://leetcode.com/problems/same-tree/
+  def isSameTree(p: TreeNode, q: TreeNode): Boolean = {
+    if (p == null && q == null) true
+    else if (p == null || q == null || p.value != q.value) false
+    else isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+  }
 }
