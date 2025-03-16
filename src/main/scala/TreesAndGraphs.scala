@@ -36,7 +36,7 @@ object TreesAndGraphs {
     else if (p == null || q == null || p.value != q.value) false
     else isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
   }
-  // https: //leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+  // https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
   def lowestCommonAncestor(root: TreeNode, p: TreeNode, q: TreeNode): TreeNode = {
     if (root == null) null
     else if (root.value == p.value || root.value == q.value) root
@@ -46,6 +46,18 @@ object TreesAndGraphs {
       if (left != null && right != null) root
       else if (left != null) left
       else right
+    }
+  }
+  // https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/707/traversals-trees-graphs/4691/
+  def minDepth(root: TreeNode): Int = {
+    if (root == null) 0
+    else {
+      (root.left, root.right) match {
+        case (null, null) => 1
+        case (left, null) => minDepth(left) + 1
+        case (null, right) => minDepth(right) + 1
+        case (left, right) => math.min(minDepth(left), minDepth(right)) + 1
+      }
     }
   }
 }

@@ -153,4 +153,26 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("4691. minDepth") {
+    it("should return correct output for case 1") {
+      val input = TreeNode(3,
+        _left = TreeNode(9),
+        _right = TreeNode(20,
+          _left = TreeNode(15),
+          _right = TreeNode(7)))
+      val expected = 2
+      val output = TreesAndGraphs.minDepth(input)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val input = TreeNode(2,
+        _right = TreeNode(3,
+          _right = TreeNode(4,
+            _right = TreeNode(5,
+              _right = TreeNode(6)))))
+      val expected = 5
+      val output = TreesAndGraphs.minDepth(input)
+      assert(output == expected)
+    }
+  }
 }
