@@ -36,4 +36,16 @@ object TreesAndGraphs {
     else if (p == null || q == null || p.value != q.value) false
     else isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
   }
+  // https: //leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+  def lowestCommonAncestor(root: TreeNode, p: TreeNode, q: TreeNode): TreeNode = {
+    if (root == null) null
+    else if (root.value == p.value || root.value == q.value) root
+    else {
+      val left = lowestCommonAncestor(root.left, p, q)
+      val right = lowestCommonAncestor(root.right, p, q)
+      if (left != null && right != null) root
+      else if (left != null) left
+      else right
+    }
+  }
 }

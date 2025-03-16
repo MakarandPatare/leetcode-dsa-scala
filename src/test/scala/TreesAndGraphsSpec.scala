@@ -111,4 +111,46 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("236. lowestCommonAncestor") {
+    it("should return correct output for case 1") {
+      val inputTree = TreeNode(3,
+        _left = TreeNode(5,
+          _left = TreeNode(6),
+          _right = TreeNode(2,
+            _left = TreeNode(7),
+            _right = TreeNode(4))),
+        _right = TreeNode(1,
+          _left = TreeNode(),
+          _right = TreeNode(8)))
+      val p = TreeNode(5)
+      val q = TreeNode(1)
+      val expected = TreeNode(3, TreeNode(5, TreeNode(6, null, null), TreeNode(2, TreeNode(7, null, null), TreeNode(4, null, null))), TreeNode(1, TreeNode(0, null, null), TreeNode(8, null, null)))
+      val output = TreesAndGraphs.lowestCommonAncestor(inputTree, p, q)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val inputTree = TreeNode(3,
+        _left = TreeNode(5,
+          _left = TreeNode(6),
+          _right = TreeNode(2,
+            _left = TreeNode(7),
+            _right = TreeNode(4))),
+        _right = TreeNode(1,
+          _left = TreeNode(),
+          _right = TreeNode(8)))
+      val p = TreeNode(5)
+      val q = TreeNode(4)
+      val expected = TreeNode(5, TreeNode(6, null, null), TreeNode(2, TreeNode(7, null, null), TreeNode(4, null, null)))
+      val output = TreesAndGraphs.lowestCommonAncestor(inputTree, p, q)
+      assert(output == expected)
+    }
+    it("should return correct output for case 3") {
+      val inputTree = TreeNode(1, _left = TreeNode(2))
+      val p = TreeNode(1)
+      val q = TreeNode(2)
+      val expected = TreeNode(1, TreeNode(2, null, null), null)
+      val output = TreesAndGraphs.lowestCommonAncestor(inputTree, p, q)
+      assert(output == expected)
+    }
+  }
 }
