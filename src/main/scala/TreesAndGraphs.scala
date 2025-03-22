@@ -48,7 +48,6 @@ object TreesAndGraphs {
       else right
     }
   }
-  
   // https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/707/traversals-trees-graphs/4691/
   def minDepth(root: TreeNode): Int = {
     if (root == null) 0
@@ -60,5 +59,14 @@ object TreesAndGraphs {
         case (left, right) => math.min(minDepth(left), minDepth(right)) + 1
       }
     }
+  }
+  // https://leetcode.com/explore/featured/card/leetcodes-interview-crash-course-data-structures-and-algorithms/707/traversals-trees-graphs/4617/
+  def maxAncestorDiff(root: TreeNode): Int = {
+    def loop(root: TreeNode, minVal: Int, maxVal: Int): Int = {
+      if (root == null) math.abs(maxVal - minVal)
+      else math.max(loop(root.left, math.min(minVal, root.value), math.max(maxVal, root.value)),
+                    loop(root.right, math.min(minVal, root.value), math.max(maxVal, root.value)))
+    }
+    loop(root, root.value, root.value)
   }
 }

@@ -176,4 +176,31 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("4617. maxAncestorDiff") {
+    it("should return correct output for case 1") {
+      //[8,3,10,1,6,null,14,null,null,4,7,13]
+      val input = TreeNode(8,
+        _left = TreeNode(3,
+          _left = TreeNode(1),
+          _right = TreeNode(6,
+            _left = TreeNode(4),
+            _right = TreeNode(7))),
+        _right = TreeNode(10,
+          _right = TreeNode(14,
+            _left = TreeNode(13))))
+      val expected = 7
+      val output = TreesAndGraphs.maxAncestorDiff(input)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      //[1,null,2,null,0,3]
+      val input = TreeNode(1,
+        _right = TreeNode(2,
+          _right = TreeNode(0,
+            _left = TreeNode(3))))
+      val expected = 3
+      val output = TreesAndGraphs.maxAncestorDiff(input)
+      assert(output == expected)
+    }
+  }
 }
