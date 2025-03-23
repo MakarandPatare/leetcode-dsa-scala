@@ -119,4 +119,24 @@ object TreesAndGraphs {
     }
     ans.toList
   }
+  // https://leetcode.com/problems/deepest-leaves-sum/description/
+  def deepestLeavesSum(root: TreeNode): Int = {
+    if (root == null) return 0
+    val queue = scala.collection.mutable.Queue[TreeNode]()
+    var ans = 0
+    queue.enqueue(root)
+    while(queue.nonEmpty) {
+      var curSum = 0
+      for (_ <- queue.indices) {
+        val curNode = queue.dequeue()
+        if (curNode.left == null && curNode.right == null) curSum += curNode.value
+        else {
+          if (curNode.left != null) queue.enqueue(curNode.left)
+          if (curNode.right != null) queue.enqueue(curNode.right)
+        }
+      }
+      ans = curSum
+    }
+    ans
+  }
 }

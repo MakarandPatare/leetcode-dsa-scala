@@ -284,4 +284,38 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("1302. deepestLeavesSum") {
+    it("should return correct output for case 1") {
+      // [1,2,3,4,5,null,6,7,null,null,null,null,8]
+      val input = TreeNode(1,
+        _left = TreeNode(2,
+          _left = TreeNode(4,
+            _left = TreeNode(7)),
+          _right = TreeNode(5)),
+        _right = TreeNode(3,
+          _right = TreeNode(6,
+            _right = TreeNode(8))))
+      val expected = 15
+      val output = TreesAndGraphs.deepestLeavesSum(input)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      // [6,7,8,2,7,1,3,9,null,1,4,null,null,null,5]
+      val input = TreeNode(6,
+        _left = TreeNode(7,
+          _left = TreeNode(2,
+            _left = TreeNode(9)),
+          _right = TreeNode(7,
+            _left = TreeNode(1),
+            _right = TreeNode(4))),
+        _right = TreeNode(8,
+          _left = TreeNode(1),
+          _right = TreeNode(3,
+            _right = TreeNode(5))
+        ))
+      val expected = 19
+      val output = TreesAndGraphs.deepestLeavesSum(input)
+      assert(output == expected)
+    }
+  }
 }
