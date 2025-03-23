@@ -255,9 +255,32 @@ class TreesAndGraphsSpec extends AnyFunSpec {
     }
     it("Should return correct output for case 4") {
       // [1,2,3,null,5,null,4]
-      val input = null
+      val input: TreeNode = null
       val expected = List.empty
       val output = TreesAndGraphs.rightSideView(input)
+      assert(output == expected)
+    }
+  }
+  describe("515. largestValues") {
+    it("should return correct output for case 1") {
+      // [1,3,2,5,3,null,9]
+      val input = TreeNode(1,
+      _left = TreeNode(3,
+        _left = TreeNode(5),
+        _right = TreeNode(3)),
+        _right = TreeNode(2,
+          _right = TreeNode(9)))
+      val expected = List(1,3,9)
+      val output = TreesAndGraphs.largestValues(input)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      // [1,2,3]
+      val input = TreeNode(1,
+        _left = TreeNode(2),
+        _right = TreeNode(3))
+      val expected = List(1, 3)
+      val output = TreesAndGraphs.largestValues(input)
       assert(output == expected)
     }
   }

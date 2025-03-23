@@ -101,4 +101,22 @@ object TreesAndGraphs {
     }
     ans.toList
   }
+  // https://leetcode.com/problems/find-largest-value-in-each-tree-row/description/
+  def largestValues(root: TreeNode): List[Int] = {
+    if (root == null) return Nil
+    val queue = scala.collection.mutable.Queue[TreeNode]()
+    val ans = scala.collection.mutable.ArrayBuffer[Int]()
+    queue.enqueue(root)
+    while(queue.nonEmpty) {
+      var curMax = Int.MinValue
+      for (_ <- queue.indices) {
+        val curNode = queue.dequeue()
+        curMax = curMax.max(curNode.value)
+        if (curNode.left != null) queue.enqueue(curNode.left)
+        if (curNode.right != null) queue.enqueue(curNode.right)
+      }
+      ans += curMax
+    }
+    ans.toList
+  }
 }
