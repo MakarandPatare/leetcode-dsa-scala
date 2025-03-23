@@ -196,10 +196,29 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       //[1,null,2,null,0,3]
       val input = TreeNode(1,
         _right = TreeNode(2,
-          _right = TreeNode(0,
+          _right = TreeNode(
             _left = TreeNode(3))))
       val expected = 3
       val output = TreesAndGraphs.maxAncestorDiff(input)
+      assert(output == expected)
+    }
+  }
+  describe("543. diameterOfBinaryTree") {
+    it("should return correct output for case 1") {
+      val input = TreeNode(1,
+        _left = TreeNode(2,
+          _left = TreeNode(4),
+          _right = TreeNode(5)),
+        _right = TreeNode(3))
+      val expected = 3
+      val output = TreesAndGraphs.diameterOfBinaryTree(input)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val input = TreeNode(1,
+        _left = TreeNode(2))
+      val expected = 1
+      val output = TreesAndGraphs.diameterOfBinaryTree(input)
       assert(output == expected)
     }
   }

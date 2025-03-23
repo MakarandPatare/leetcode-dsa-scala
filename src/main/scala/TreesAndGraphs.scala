@@ -69,4 +69,19 @@ object TreesAndGraphs {
     }
     loop(root, root.value, root.value)
   }
+  // https://leetcode.com/problems/diameter-of-binary-tree/description/
+  def diameterOfBinaryTree(root: TreeNode): Int = {
+    var diameter = 0
+    def dfs(root: TreeNode): Int = {
+      if (root == null) 0
+      else {
+        val leftDepth = dfs(root.left)
+        val rightDepth = dfs(root.right)
+        diameter = math.max(diameter, leftDepth + rightDepth)
+        math.max(leftDepth, rightDepth) + 1
+      }
+    }
+    dfs(root)
+    diameter
+  }
 }
