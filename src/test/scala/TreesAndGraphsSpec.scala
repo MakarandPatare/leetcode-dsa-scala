@@ -222,4 +222,43 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("199. Binary Tree Right Side View") {
+    it("Should return correct output for case 1") {
+      // [1,2,3,null,5,null,4]
+      val input = TreeNode(1,
+        _left = TreeNode(2,
+          _right = TreeNode(5)),
+        _right = TreeNode(3,
+          _right = TreeNode(4)))
+      val expected = List(1,3,4)
+      val output = TreesAndGraphs.rightSideView(input)
+      assert(output == expected)
+    }
+    it("Should return correct output for case 2") {
+      // [1,2,3,4,null,null,null,5]
+      val input = TreeNode(1,
+        _left = TreeNode(2,
+          _left = TreeNode(4,
+            _left = TreeNode(5))),
+        _right = TreeNode(3))
+      val expected = List(1,3,4,5)
+      val output = TreesAndGraphs.rightSideView(input)
+      assert(output == expected)
+    }
+    it("Should return correct output for case 3") {
+      // [1,null,3]
+      val input = TreeNode(1,
+          _right = TreeNode(3))
+      val expected = List(1, 3)
+      val output = TreesAndGraphs.rightSideView(input)
+      assert(output == expected)
+    }
+    it("Should return correct output for case 4") {
+      // [1,2,3,null,5,null,4]
+      val input = null
+      val expected = List.empty
+      val output = TreesAndGraphs.rightSideView(input)
+      assert(output == expected)
+    }
+  }
 }

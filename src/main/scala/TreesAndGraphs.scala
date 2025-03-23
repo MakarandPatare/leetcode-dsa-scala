@@ -84,4 +84,21 @@ object TreesAndGraphs {
     dfs(root)
     diameter
   }
+  // https://leetcode.com/problems/binary-tree-right-side-view/description/
+  def rightSideView(root: TreeNode): List[Int] = {
+    if (root == null) return Nil
+    val queue = scala.collection.mutable.Queue[TreeNode]()
+    val ans = scala.collection.mutable.ArrayBuffer[Int]()
+    queue.enqueue(root)
+    var lastNode = root
+    while(queue.nonEmpty) {
+      for (_ <- queue.indices) {
+        lastNode = queue.dequeue()
+        if (lastNode.left != null) queue.enqueue(lastNode.left)
+        if (lastNode.right != null) queue.enqueue(lastNode.right)
+      }
+      ans += lastNode.value
+    }
+    ans.toList
+  }
 }
