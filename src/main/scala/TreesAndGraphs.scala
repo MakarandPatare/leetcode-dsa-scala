@@ -139,4 +139,24 @@ object TreesAndGraphs {
     }
     ans
   }
+  // https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/
+  def zigzagLevelOrder(root: TreeNode): List[List[Int]] = {
+    if (root == null) return Nil
+    val queue = scala.collection.mutable.Queue[TreeNode]()
+    val ans = scala.collection.mutable.ArrayBuffer[List[Int]]()
+    queue.enqueue(root)
+    var leftToRight = true
+    while(queue.nonEmpty) {
+      val tempAns = scala.collection.mutable.ArrayBuffer[Int]()
+      for (_ <- queue.indices) {
+        val curNode = queue.dequeue()
+        if (leftToRight) tempAns.append(curNode.value) else tempAns.prepend(curNode.value)
+        if (curNode.left != null) queue.enqueue(curNode.left)
+        if (curNode.right != null) queue.enqueue(curNode.right)
+      }
+      leftToRight = !leftToRight
+      ans += tempAns.toList
+    }
+    ans.toList
+  }
 }

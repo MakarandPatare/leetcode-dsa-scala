@@ -318,4 +318,31 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("103. zigzagLevelOrder") {
+    it("should return correct output for case 1") {
+      // [3,9,20,null,null,15,7]
+      val input = TreeNode(3,
+        _left = TreeNode(9),
+        _right = TreeNode(20,
+          _left = TreeNode(15),
+          _right = TreeNode(7)))
+      val expected = List(List(3), List(20, 9), List(15, 7))
+      val output = TreesAndGraphs.zigzagLevelOrder(input)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      // [3,9,20,null,null,15,7]
+      val input = TreeNode(1)
+      val expected = List(List(1))
+      val output = TreesAndGraphs.zigzagLevelOrder(input)
+      assert(output == expected)
+    }
+    it("should return correct output for case 3") {
+      // [3,9,20,null,null,15,7]
+      val input: TreeNode = null
+      val expected = List.empty
+      val output = TreesAndGraphs.zigzagLevelOrder(input)
+      assert(output == expected)
+    }
+  }
 }
