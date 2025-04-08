@@ -345,4 +345,37 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("938. rangeSumBST") {
+    it("should return correct answer for case 1") {
+      // [10,5,15,3,7,null,18]
+      val inputTree = TreeNode(10,
+        _left = TreeNode(5,
+          _left = TreeNode(3),
+          _right = TreeNode(7)),
+        _right = TreeNode(15,
+          _right = TreeNode(18)))
+      val ipLow = 7
+      val ipHigh = 15
+      val expected = 32
+      val output = TreesAndGraphs.rangeSumBST(inputTree, ipLow, ipHigh)
+      assert(output == expected)
+    }
+    it("should return correct answer for case 2") {
+      // [10,5,15,3,7,13,18,1,null,6]
+      val inputTree = TreeNode(10,
+        _left = TreeNode(5,
+          _left = TreeNode(3,
+            _left = TreeNode(1)),
+          _right = TreeNode(7,
+            _left = TreeNode(6))),
+        _right = TreeNode(15,
+          _left = TreeNode(13),
+          _right = TreeNode(18)))
+      val ipLow = 6
+      val ipHigh = 10
+      val expected = 23
+      val output = TreesAndGraphs.rangeSumBST(inputTree, ipLow, ipHigh)
+      assert(output == expected)
+    }
+  }
 }

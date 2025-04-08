@@ -159,4 +159,15 @@ object TreesAndGraphs {
     }
     ans.toList
   }
+  // https://leetcode.com/problems/range-sum-of-bst/description/
+  def rangeSumBST(root: TreeNode, low: Int, high: Int): Int = {
+      if (root == null) 0
+      else {
+        var ans = 0
+        if (root.value >= low && root.value <= high) ans += root.value
+        if (root.value >= low) ans += rangeSumBST(root.left, low, high)
+        if (root.value <= high) ans += rangeSumBST(root.right, low, high)
+        ans
+      }
+  }
 }
