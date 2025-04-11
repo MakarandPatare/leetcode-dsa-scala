@@ -194,4 +194,13 @@ object TreesAndGraphs {
     }
     dfs(root, Long.MinValue, Long.MaxValue)
   }
+  // https://leetcode.com/problems/insert-into-a-binary-search-tree/description/
+  def insertIntoBST(root: TreeNode, `val`: Int): TreeNode = {
+    if (root == null) TreeNode(`val`)
+    else {
+      if (`val` > root.value) root.right = insertIntoBST(root.right, `val`)
+      else root.left = insertIntoBST(root.left, `val`)
+      root
+    }
+  }
 }
