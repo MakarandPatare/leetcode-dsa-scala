@@ -401,6 +401,40 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       val expected = 1
       assert(output == expected)
     }
-
+  }
+  describe("98. isValidBST") {
+    it("should return correct answer for case 1") {
+      val input = TreeNode(2,
+        _left = TreeNode(1),
+        _right = TreeNode(3))
+      val output = TreesAndGraphs.isValidBST(input)
+      val expected = true
+      assert(output == expected)
+    }
+    it("should return correct answer for case 2") {
+      // [5,1,4,null,null,3,6]
+      val input = TreeNode(5,
+        _left = TreeNode(1),
+        _right = TreeNode(4,
+          _left = TreeNode(3),
+          _right = TreeNode(6)))
+      val output = TreesAndGraphs.isValidBST(input)
+      val expected = false
+      assert(output == expected)
+    }
+    it("should return correct answer for custom case 1") {
+      val input = TreeNode(2,
+        _left = TreeNode(2),
+        _right = TreeNode(2))
+      val output = TreesAndGraphs.isValidBST(input)
+      val expected = false
+      assert(output == expected)
+    }
+    it("should return correct answer for custom case 2") {
+      val input = TreeNode(2147483647)
+      val output = TreesAndGraphs.isValidBST(input)
+      val expected = true
+      assert(output == expected)
+    }
   }
 }

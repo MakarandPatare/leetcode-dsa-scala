@@ -183,4 +183,15 @@ object TreesAndGraphs {
     dfs(root)
     array.sliding(2).map(l => math.abs(l(0) - l(1))).min
   }
+  // https://leetcode.com/problems/validate-binary-search-tree/description/
+  def isValidBST(root: TreeNode): Boolean = {
+    def dfs(root: TreeNode, small: Long, large: Long): Boolean = {
+      if (root == null) true
+      else {
+        if (root.value <= small || root.value >= large) return false
+        dfs(root.left, small, root.value) && dfs(root.right, root.value, large)
+      }
+    }
+    dfs(root, Long.MinValue, Long.MaxValue)
+  }
 }
