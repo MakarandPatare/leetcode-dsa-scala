@@ -170,4 +170,17 @@ object TreesAndGraphs {
         ans
       }
   }
+  // https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/
+  def getMinimumDifference(root: TreeNode): Int = {
+    val array = scala.collection.mutable.ArrayBuffer[Int]()
+    def dfs(root: TreeNode): Unit = {
+      if (root != null) {
+        dfs(root.left)
+        array += root.value
+        dfs(root.right)
+      }
+    }
+    dfs(root)
+    array.sliding(2).map(l => math.abs(l(0) - l(1))).min
+  }
 }

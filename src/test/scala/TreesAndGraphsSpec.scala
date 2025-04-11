@@ -378,4 +378,29 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("530. getMinimumDifference") {
+    it("should return correct answer for case 1") {
+      // [4,2,6,1,3]
+      val input = TreeNode(4,
+        _left = TreeNode(2,
+          _left = TreeNode(1),
+          _right = TreeNode(3)),
+        _right = TreeNode(6))
+      val output = TreesAndGraphs.getMinimumDifference(input)
+      val expected = 1
+      assert(output == expected)
+    }
+    it("should return correct answer for case 2") {
+      // [1,0,48,null,null,12,49]
+      val input = TreeNode(1,
+        _left = TreeNode(),
+        _right = TreeNode(48,
+          _left = TreeNode(12),
+          _right = TreeNode(49)))
+      val output = TreesAndGraphs.getMinimumDifference(input)
+      val expected = 1
+      assert(output == expected)
+    }
+
+  }
 }
