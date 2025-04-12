@@ -496,4 +496,26 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("270. closestValue") {
+    it("should return correct answer for case 1") {
+      // [4,2,5,1,3]
+      val inputRoot = TreeNode(4,
+        _left = TreeNode(2,
+          _left = TreeNode(1),
+          _right = TreeNode(3)),
+        _right = TreeNode(5))
+      val inputTarget = 3.714286
+      val output = TreesAndGraphs.closestValue(inputRoot, inputTarget)
+      val expected = 4
+      assert(output == expected)
+    }
+    it("should return correct answer for case 2") {
+      // [4,2,5,1,3]
+      val inputRoot = TreeNode(1)
+      val inputTarget = 4.428571
+      val output = TreesAndGraphs.closestValue(inputRoot, inputTarget)
+      val expected = 1
+      assert(output == expected)
+    }
+  }
 }

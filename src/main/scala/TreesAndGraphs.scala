@@ -203,4 +203,18 @@ object TreesAndGraphs {
       root
     }
   }
+  // https://leetcode.com/problems/closest-binary-search-tree-value/description/
+  def closestValue(root: TreeNode, target: Double): Int = {
+    var curRoot = root
+    var closest = root.value
+    var curVal = root.value
+    while (curRoot != null) {
+      curVal = curRoot.value
+      closest = if (math.abs(curVal - target) < math.abs(closest - target) ||
+        (math.abs(curVal - target) == math.abs(closest - target) && curVal < closest)) curVal
+      else closest
+      curRoot = if (target < curRoot.value) curRoot.left else curRoot.right
+    }
+    closest
+  }
 }
