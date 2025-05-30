@@ -1,8 +1,8 @@
-import ArraysAndStrings.reverseString
+import ArraysAndStrings.{reverseString, twoSum}
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers.shouldEqual
 
-class ReverseStringSpec extends AnyFunSpec {
+class ArraysAndStringsSpec extends AnyFunSpec {
   describe("reverseString") {
     it("should reverse normal string") {
       val inputString = Array[Char]('h','e','l','l','o')
@@ -24,6 +24,26 @@ class ReverseStringSpec extends AnyFunSpec {
       val inputString = Array[Char]()
       val expectedString = Array[Char]()
       assert(reverseString(inputString) sameElements expectedString)
+    }
+  }
+  describe("twoSum") {
+    it("should return correct output for case 1") {
+      val inputArray = Array(2,7,11,15)
+      val target = 9
+      val expectedOutput = Array(1, 2)
+      assert(twoSum(inputArray, target) sameElements expectedOutput)
+    }
+    it("should return correct output for case 2") {
+      val inputArray = Array(2,3,4)
+      val target = 6
+      val expectedOutput = Array(1, 3)
+      assert(twoSum(inputArray, target) sameElements expectedOutput)
+    }
+    it("should return correct output for case 3") {
+      val inputArray = Array(-1,0)
+      val target = -1
+      val expectedOutput = Array(1, 2)
+      assert(twoSum(inputArray, target) sameElements expectedOutput)
     }
   }
 }
