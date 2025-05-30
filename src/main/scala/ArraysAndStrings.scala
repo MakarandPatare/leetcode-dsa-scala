@@ -26,4 +26,15 @@ object ArraysAndStrings {
     }
     loop(0, numbers.length - 1)
   }
+  // https://leetcode.com/problems/is-subsequence/description/
+  def isSubsequence(s: String, t: String): Boolean = {
+    @tailrec
+    def loop(i: Int, j: Int): Boolean = {
+      if (i == s.length) true
+      else if (j == t.length) false
+      else if (s(i) == t(j)) loop(i + 1, j + 1)
+      else loop(i, j + 1)
+    }
+    loop(0, 0)
+  }
 }

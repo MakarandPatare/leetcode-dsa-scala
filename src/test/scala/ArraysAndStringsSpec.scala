@@ -1,4 +1,4 @@
-import ArraysAndStrings.{reverseString, twoSum}
+import ArraysAndStrings.{isSubsequence, reverseString, twoSum}
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers.shouldEqual
 
@@ -44,6 +44,22 @@ class ArraysAndStringsSpec extends AnyFunSpec {
       val target = -1
       val expectedOutput = Array(1, 2)
       assert(twoSum(inputArray, target) sameElements expectedOutput)
+    }
+  }
+  describe("isSubsequence") {
+    it("should return true for case 1") {
+      val inputS = "abc"
+      val inputT = "ahbgdc"
+      val expected = true
+      val output = isSubsequence(inputS, inputT)
+      assert(output == expected)
+    }
+    it("should return true for case 2") {
+      val inputS = "axc"
+      val inputT = "ahbgdc"
+      val expected = false
+      val output = isSubsequence(inputS, inputT)
+      assert(output == expected)
     }
   }
 }
