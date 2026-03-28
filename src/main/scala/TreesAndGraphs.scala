@@ -246,4 +246,39 @@ object TreesAndGraphs {
     }
     closest
   }
+  // https://leetcode.com/problems/number-of-provinces/description/
+  // TODO: Better solutions exist for this problem. To be revisited
+  def findCircleNum(isConnected: Array[Array[Int]]): Int = {
+    val n = isConnected.length
+    val graph = mutable.Map[Int, mutable.ArrayBuffer[Int]]()
+    val seen = new Array[Boolean](n)
+    // Build the graph
+    for (i <- 0 until n) {
+      if (!graph.contains(i)) graph(i) = mutable.ArrayBuffer[Int]()
+      for (j <- i + 1 until n) {
+        if (!graph.contains(j)) graph(j) = mutable.ArrayBuffer[Int]()
+        if (isConnected(i)(j) == 1) {
+          graph(i) += j
+          graph(j) += i
+        }
+      }
+    }
+    def dfs(node: Int): Unit = {
+      for (neighbor <- graph(node)) {
+        if (!seen(neighbor)) {
+          seen(neighbor) = true
+          dfs(neighbor)
+        }
+      }
+    }
+    var ans = 0
+    for (i <- 0 until n) {
+      if (!seen(i)) {
+        ans += 1
+        seen(i) = true
+        dfs(i)
+      }
+    }
+    ans
+  }
 }

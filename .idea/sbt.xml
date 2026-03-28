@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ScalaSbtSettings">
-    <option name="customLauncherPath" />
-    <option name="customVMEnabled" value="true" />
     <option name="customVMPath" value="$USER_HOME$/Library/Java/JavaVirtualMachines/openjdk-23.0.2/Contents/Home" />
     <option name="linkedExternalProjectsSettings">
       <SbtProjectSettings>
@@ -16,7 +14,6 @@
         </option>
         <option name="resolveSbtClassifiers" value="true" />
         <option name="sbtVersion" value="1.10.7" />
-        <option name="separateProdAndTestSources" value="true" />
       </SbtProjectSettings>
     </option>
     <option name="maximumHeapSize" value="512" />
