@@ -1,3 +1,5 @@
+import scala.collection.mutable
+
 object TreesAndGraphs {
   case class TreeNode(_value: Int = 0, _left: TreeNode = null, _right: TreeNode = null) {
     var value: Int = _value
@@ -8,12 +10,38 @@ object TreesAndGraphs {
   def maxDepth(root: TreeNode): Int = {
     if (root == null) 0 else 1 + math.max(maxDepth(root.left), maxDepth(root.right))
   }
+  def maxDepthIterative(root: TreeNode): Int = {
+    if (root == null) return 0
+    val stack = mutable.Stack[(TreeNode, Int)]()
+    stack.push((root, 1))
+    var ans = 0
+    while(stack.nonEmpty) {
+      val (node, depth) = stack.pop()
+      ans = math.max(ans, depth)
+
+      if (node.left != null) stack.push((node.left, depth + 1))
+      if (node.right != null) stack.push((node.right, depth + 1))
+    }
+    ans
+  }
   // https://leetcode.com/problems/path-sum/
   def hasPathSum(root: TreeNode, targetSum: Int): Boolean =
     if (root == null) false
     else if (root.left == null && root.right == null)
       root.value == targetSum
     else hasPathSum(root.left, targetSum - root.value) || hasPathSum(root.right, targetSum - root.value)
+  def hasPathSumIterative(root: TreeNode, targetSum: Int): Boolean = {
+    if (root == null) return false
+    val stack = mutable.Stack[(TreeNode, Int)]()
+    stack.push((root, targetSum))
+    while(stack.nonEmpty) {
+      val (node, remaining) = stack.pop()
+      if (node.left == null && node.right == null && node.value == remaining) return true
+      if (node.left != null) stack.push((node.left, remaining - node.value))
+      if (node.right != null) stack.push((node.right, remaining - node.value))
+    }
+    false
+  }
   // https://leetcode.com/problems/count-good-nodes-in-binary-tree/
   def goodNodes(root: TreeNode): Int = {
     def dfs(root: TreeNode, currentMax: Int): Int = {
@@ -129,11 +157,12 @@ object TreesAndGraphs {
       var curSum = 0
       for (_ <- queue.indices) {
         val curNode = queue.dequeue()
-        if (curNode.left == null && curNode.right == null) curSum += curNode.value
-        else {
-          if (curNode.left != null) queue.enqueue(curNode.left)
-          if (curNode.right != null) queue.enqueue(curNode.right)
-        }
+        /* Unnecessary in this example
+         * if (curNode.left == null && curNode.right == null)
+         * followed by below line in else */
+        curSum += curNode.value
+        if (curNode.left != null) queue.enqueue(curNode.left)
+        if (curNode.right != null) queue.enqueue(curNode.right)
       }
       ans = curSum
     }
