@@ -589,4 +589,28 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("200. Number of Islands") {
+    it("should return correct output for case 1") {
+      val input = Array(
+        Array('1','1','1','1','0'),
+        Array('1','1','0','1','0'),
+        Array('1','1','0','0','0'),
+        Array('0','0','0','0','0')
+      )
+      val output = TreesAndGraphs.numIslands(input)
+      val expected = 1
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val input = Array(
+        Array('1','1','0','0','0'),
+        Array('1','1','0','0','0'),
+        Array('0','0','1','0','0'),
+        Array('0','0','0','1','1')
+      )
+      val output = TreesAndGraphs.numIslands(input)
+      val expected = 3
+      assert(output == expected)
+    }
+  }
 }

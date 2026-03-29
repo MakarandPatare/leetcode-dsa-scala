@@ -281,4 +281,37 @@ object TreesAndGraphs {
     }
     ans
   }
+  // https://leetcode.com/problems/number-of-islands/description/
+  def numIslands(grid: Array[Array[Char]]): Int = {
+    val m = grid.length
+    val n = grid(0).length
+    val directions = Array((0, 1), (1, 0), (0, -1), (-1, 0))
+    val seen = Array.ofDim[Boolean](m, n)
+    
+    def valid(row: Int, col: Int): Boolean = {
+      0 <= row && row < m && 0 <= col && col < n && grid(row)(col) == '1'
+    }
+    
+    def dfs(row: Int, col: Int): Unit = {
+      for ((dRow, dCol) <- directions) {
+        val nextRow = row + dRow
+        val nextCol = col + dCol
+        if (valid(nextRow, nextCol) && !seen(nextRow)(nextCol)) {
+          seen(nextRow)(nextCol) = true
+          dfs(nextRow, nextCol)
+        }
+      }
+    }
+
+    var ans = 0
+    for (row <- 0 until m; col <- 0 until n) {
+      if (!seen(row)(col) && grid(row)(col) == '1') {
+        ans += 1
+        seen(row)(col) = true
+        dfs(row, col)
+      }
+    }
+
+    ans
+  }
 }
