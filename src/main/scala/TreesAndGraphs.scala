@@ -368,4 +368,12 @@ object TreesAndGraphs {
     }
     seen.size == rooms.size
   }
+  // https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/description/
+  def findSmallestSetOfVertices(n: Int, edges: List[List[Int]]): List[Int] = {
+    val indegree = new Array[Int](n)
+    for (edge <- edges) {
+      indegree(edge(1)) += 1
+    }
+    indegree.indices.filter(indegree(_) == 0).toList
+  }
 }

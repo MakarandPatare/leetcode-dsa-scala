@@ -650,4 +650,20 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("1557. Minimum Number of Vertices to Reach All Nodes") {
+    it("should return correct output for case 1") {
+      val n = 6
+      val edges = List(List(0,1), List(0,2), List(2,5), List(3,4), List(4,2))
+      val output = TreesAndGraphs.findSmallestSetOfVertices(n, edges)
+      val expected = List(0, 3)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val n = 5
+      val edges = List(List(0,1), List(2,1), List(3,1), List(1,4), List(2,4))
+      val output = TreesAndGraphs.findSmallestSetOfVertices(n, edges)
+      val expected = List(0, 2, 3)
+      assert(output == expected)
+    }
+  }
 }
