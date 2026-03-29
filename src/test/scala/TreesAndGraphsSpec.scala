@@ -636,4 +636,18 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("841. Keys and Rooms") {
+    it("should return correct output for case 1") {
+      val rooms = List(List(1), List(2), List(3), List())
+      val output = TreesAndGraphs.canVisitAllRooms(rooms)
+      val expected = true
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val rooms = List(List(1, 3), List(3, 0, 1), List(2), List(0))
+      val output = TreesAndGraphs.canVisitAllRooms(rooms)
+      val expected = false
+      assert(output == expected)
+    }
+  }
 }

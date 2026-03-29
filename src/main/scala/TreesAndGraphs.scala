@@ -326,7 +326,7 @@ object TreesAndGraphs {
     for (i <- 0 until n) {
       graph(i) = mutable.ArrayBuffer[Int]()
     }
-    
+
     for (connection <- connections) {
       val x = connection(0)
       val y = connection(1)
@@ -347,9 +347,25 @@ object TreesAndGraphs {
       }
       count
     }
-    
+
     // Mark 0 seen to avoid cycles
     seen += 0
     dfs(0)
+  }
+  // https://leetcode.com/problems/keys-and-rooms/description/
+  def canVisitAllRooms(rooms: List[List[Int]]): Boolean = {
+    val seen = mutable.Set[Int]()
+    seen += 0
+    dfs(0)
+    
+    def dfs(node: Int): Unit = {
+      for (neighbor <- rooms(node)) {
+        if (!seen.contains(neighbor)) {
+          seen += neighbor
+          dfs(neighbor)
+        }
+      }
+    }
+    seen.size == rooms.size
   }
 }
