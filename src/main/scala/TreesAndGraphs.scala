@@ -314,4 +314,42 @@ object TreesAndGraphs {
 
     ans
   }
+  // https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/
+  def minReorder(n: Int, connections: Array[Array[Int]]): Int = {
+    // Define undirected Graph, set of directed Paths and set of seen paths
+    case class Path(from: Int, to: Int)
+    val graph = mutable.Map[Int, mutable.ArrayBuffer[Int]]()
+    val paths = mutable.Set[Path]()
+    val seen = mutable.Set[Int]()
+
+    // Initialize and populate graph and paths
+    for (i <- 0 until n) {
+      graph(i) = mutable.ArrayBuffer[Int]()
+    }
+    
+    for (connection <- connections) {
+      val x = connection(0)
+      val y = connection(1)
+      graph(x) += y
+      graph(y) += x
+      paths += Path(x, y)
+    }
+
+    // DFS through each unseen neighbor of node in graph
+    def dfs(node: Int): Int = {
+      var count = 0
+      for (neighbor <- graph(node)) {
+        if(!seen(neighbor)) {
+          if (paths.contains(Path(node, neighbor))) count += 1
+          seen += neighbor
+          count += dfs(neighbor)
+        }
+      }
+      count
+    }
+    
+    // Mark 0 seen to avoid cycles
+    seen += 0
+    dfs(0)
+  }
 }

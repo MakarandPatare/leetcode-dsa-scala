@@ -613,4 +613,27 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("1466. Reorder Routes to Make All Paths Lead to the City Zero") {
+    it("should return correct output for case 1") {
+      val n = 6
+      val connections = Array(Array(0,1), Array(1,3), Array(2,3), Array(4,0), Array(4,5))
+      val output = TreesAndGraphs.minReorder(n, connections)
+      val expected = 3
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val n = 5
+      val connections = Array(Array(1,0), Array(1,2), Array(3,2), Array(3,4))
+      val output = TreesAndGraphs.minReorder(n, connections)
+      val expected = 2
+      assert(output == expected)
+    }
+    it("should return correct output for case 3") {
+      val n = 3
+      val connections = Array(Array(1,0), Array(2,0))
+      val output = TreesAndGraphs.minReorder(n, connections)
+      val expected = 0
+      assert(output == expected)
+    }
+  }
 }
