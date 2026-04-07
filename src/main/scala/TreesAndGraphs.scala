@@ -376,4 +376,28 @@ object TreesAndGraphs {
     }
     indegree.indices.filter(indegree(_) == 0).toList
   }
+  // https://leetcode.com/problems/find-if-path-exists-in-graph/description/
+  def validPath(n: Int, edges: Array[Array[Int]], source: Int, destination: Int): Boolean = {
+    val graph = new Array[List[Int]](n)
+    val seen = new Array[Boolean](n)
+    
+    for (i <- 0 until n) graph(i) = Nil
+    
+    for (edge <- edges) {
+      val a = edge(0)
+      val b = edge(1)
+      graph(a) = b :: graph(a)
+      graph(b) = a :: graph(b)
+    }
+    
+    def dfs(currNode: Int): Boolean = {
+      if (currNode == destination) true
+      else {
+        seen(currNode) = true
+        graph(currNode).exists(nextNode => !seen(nextNode) && dfs(nextNode))
+      }
+    }
+    
+    dfs(source)
+  }
 }

@@ -666,4 +666,24 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("1971. Find if Path Exists in Graph") {
+    it("should return correct output for case 1") {
+      val n = 3
+      val edges = Array(Array(0, 1), Array(1, 2), Array(2, 0))
+      val source = 0
+      val destination = 2
+      val output = TreesAndGraphs.validPath(n, edges, source, destination)
+      val expected = true
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val n = 6
+      val edges = Array(Array(0, 1), Array(0, 2), Array(3, 5), Array(5, 4), Array(4, 3))
+      val source = 0
+      val destination = 5
+      val output = TreesAndGraphs.validPath(n, edges, source, destination)
+      val expected = false
+      assert(output == expected)
+    }
+  }
 }
