@@ -281,6 +281,40 @@ object TreesAndGraphs {
     }
     ans
   }
+  def findCircleNumOptimizedForMemory(isConnected: Array[Array[Int]]): Int = {
+    val n = isConnected.length
+    val graph = mutable.Map[Int, List[Int]]()
+    val seen = new Array[Boolean](n)
+
+    //Build the graph
+    for (i <- 0 until n) graph(i) = Nil
+    for (i <- 0 until n; j <- i + 1 until n) {
+      if (isConnected(i)(j) == 1) {
+        graph(i) = j :: graph(i)
+        graph(j) = i :: graph(j)
+      }
+    }
+
+    def dfs(node: Int): Unit = {
+      for (neighbor <- graph(node)) {
+        if (!seen(neighbor)) {
+          seen(neighbor) = true
+          dfs(neighbor)
+        }
+      }
+    }
+
+    var ans = 0
+    for (i <- 0 until n) {
+      if (!seen(i)) {
+        ans += 1
+        seen(i) = true
+        dfs(i)
+      }
+    }
+
+    ans
+  }
   // https://leetcode.com/problems/number-of-islands/description/
   def numIslands(grid: Array[Array[Char]]): Int = {
     val m = grid.length

@@ -589,6 +589,20 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("547. Number of Provinces - Optimized for memory") {
+    it("should return correct output for case 1") {
+      val input = Array(Array(1, 1, 0), Array(1, 1, 0), Array(0, 0, 1))
+      val output = TreesAndGraphs.findCircleNumOptimizedForMemory(input)
+      val expected = 2
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val input = Array(Array(1, 0, 0), Array(0, 1, 0), Array(0, 0, 1))
+      val output = TreesAndGraphs.findCircleNumOptimizedForMemory(input)
+      val expected = 3
+      assert(output == expected)
+    }
+  }
   describe("200. Number of Islands") {
     it("should return correct output for case 1") {
       val input = Array(
