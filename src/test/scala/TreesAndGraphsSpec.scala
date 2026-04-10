@@ -716,4 +716,18 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("695. Max Area of Island") {
+    it("should return correct output for case 1") {
+      val grid = Array(Array(0,0,1,0,0,0,0,1,0,0,0,0,0),Array(0,0,0,0,0,0,0,1,1,1,0,0,0),Array(0,1,1,0,1,0,0,0,0,0,0,0,0),Array(0,1,0,0,1,1,0,0,1,0,1,0,0),Array(0,1,0,0,1,1,0,0,1,1,1,0,0),Array(0,0,0,0,0,0,0,0,0,0,1,0,0),Array(0,0,0,0,0,0,0,1,1,1,0,0,0),Array(0,0,0,0,0,0,0,1,1,0,0,0,0))
+      val output = TreesAndGraphs.maxAreaOfIsland(grid)
+      val expected = 6
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val grid = Array(Array(0,0,0,0,0,0,0,0))
+      val output = TreesAndGraphs.maxAreaOfIsland(grid)
+      val expected = 0
+      assert(output == expected)
+    }
+  }
 }

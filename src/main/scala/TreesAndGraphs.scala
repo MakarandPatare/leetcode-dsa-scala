@@ -464,4 +464,36 @@ object TreesAndGraphs {
     }
     ans
   }
+  // https://leetcode.com/problems/max-area-of-island/description/
+  def maxAreaOfIsland(grid: Array[Array[Int]]): Int = {
+    val m = grid.length
+    val n = grid(0).length
+    val directions = List((0, 1), (1, 0), (0, -1), (-1, 0))
+    val seen = Array.ofDim[Boolean](m, n)
+    def valid(row: Int, col: Int): Boolean = {
+      0 <= row && row < m && 0 <= col && col < n && grid(row)(col) == 1
+    }
+    var curArea = 0
+    def dfs(row: Int, col: Int): Unit = {
+      for ((dRow, dCol) <- directions) {
+        val nextRow = row + dRow
+        val nextCol = col + dCol
+        if (valid(nextRow, nextCol) && !seen(nextRow)(nextCol)) {
+          seen(nextRow)(nextCol) = true
+          curArea += 1
+          dfs(nextRow, nextCol)
+        }
+      }
+    }
+    var maxArea = 0
+    for (row <- 0 until m; col <- 0 until n) {
+      if (!seen(row)(col) && grid(row)(col) == 1) {
+        seen(row)(col) = true
+        curArea = 1
+        dfs(row, col)
+        maxArea = math.max(curArea, maxArea)
+      }
+    }
+    maxArea
+  }
 }
