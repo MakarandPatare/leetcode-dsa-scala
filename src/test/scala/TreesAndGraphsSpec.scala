@@ -700,4 +700,20 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("323. Number of Connected Components in an Undirected Graph") {
+    it("should return correct output for case 1") {
+      val n = 5
+      val edges = Array(Array(0, 1), Array(1, 2), Array(3, 4))
+      val output = TreesAndGraphs.countComponents(n, edges)
+      val expected = 2
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val n = 5
+      val edges = Array(Array(0, 1), Array(1, 2), Array(2, 3), Array(3, 4))
+      val output = TreesAndGraphs.countComponents(n, edges)
+      val expected = 1
+      assert(output == expected)
+    }
+  }
 }
