@@ -730,4 +730,22 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("2368. Reachable Nodes With Restrictions") {
+    it("should return correct output for case 1") {
+      val n = 7
+      val edges = Array(Array(0, 1), Array(1, 2), Array(3, 1), Array(4, 0), Array(0, 5), Array(5, 6))
+      val restricted = Array(4, 5)
+      val output = TreesAndGraphs.reachableNodes(n, edges, restricted)
+      val expected = 4
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val n = 7
+      val edges = Array(Array(0, 1), Array(0, 2), Array(0, 5), Array(0, 4), Array(3, 2), Array(6, 5))
+      val restricted = Array(4, 2, 1)
+      val output = TreesAndGraphs.reachableNodes(n, edges, restricted)
+      val expected = 3
+      assert(output == expected)
+    }
+  }
 }

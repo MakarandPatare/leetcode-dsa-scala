@@ -496,4 +496,32 @@ object TreesAndGraphs {
     }
     maxArea
   }
+  // https://leetcode.com/problems/reachable-nodes-with-restrictions/description/
+  def reachableNodes(n: Int, edges: Array[Array[Int]], restricted: Array[Int]): Int = {
+    val graph = new Array[List[Int]](n)
+    val seen = new Array[Boolean](n)
+    val restrictedSet = restricted.toSet
+    seen(0) = true
+
+    for (i <- 0 until n) graph(i) = Nil
+
+    for(edge <- edges) {
+      val a = edge(0)
+      val b = edge(1)
+      graph(a) = b :: graph(a)
+      graph(b) = a :: graph(b)
+    }
+    
+    def dfs(node: Int): Unit = {
+      for (neighbor <- graph(node)) {
+        if (!seen(neighbor) && !restrictedSet.contains(neighbor)) {
+          seen(neighbor) = true
+          dfs(neighbor)
+        }
+      }
+    }
+    
+    dfs(0)
+    seen.count(_ == true)
+  }
 }
