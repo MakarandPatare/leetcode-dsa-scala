@@ -511,7 +511,7 @@ object TreesAndGraphs {
       graph(a) = b :: graph(a)
       graph(b) = a :: graph(b)
     }
-    
+
     def dfs(node: Int): Unit = {
       for (neighbor <- graph(node)) {
         if (!seen(neighbor) && !restrictedSet.contains(neighbor)) {
@@ -520,8 +520,39 @@ object TreesAndGraphs {
         }
       }
     }
-    
+
     dfs(0)
     seen.count(_ == true)
+  }
+  // https://leetcode.com/problems/shortest-path-in-binary-matrix/description/
+  def shortestPathBinaryMatrix(grid: Array[Array[Int]]): Int = {
+    if (grid(0)(0) == 1) return -1
+    val n = grid.length
+    val directions = Array((-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1))
+    val seen = Array.ofDim[Boolean](n, n)
+    seen(0)(0) = true
+    
+    case class State(row: Int, col: Int, steps: Int)
+    val queue = mutable.Queue[State]()
+    queue.enqueue(State(0, 0, 1))
+    
+    def valid(row: Int, col: Int): Boolean = {
+      0 <= row && row < n && 0 <= col && col < n && grid(row)(col) == 0
+    }
+    
+    while(queue.nonEmpty) {
+      val State(row, col, steps) = queue.dequeue()
+      if (row == n - 1 && col == n - 1) return steps
+      for ((dRow, dCol) <- directions) {
+        val nextRow = row + dRow
+        val nextCol = col + dCol
+        if (valid(nextRow, nextCol) && !seen(nextRow)(nextCol)) {
+          seen(nextRow)(nextCol) = true
+          queue.enqueue(State(nextRow, nextCol, steps + 1))
+        }
+      }
+    }
+    
+    -1
   }
 }

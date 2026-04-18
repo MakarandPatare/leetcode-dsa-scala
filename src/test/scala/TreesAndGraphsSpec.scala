@@ -748,4 +748,30 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("1091. Shortest Path in Binary Matrix") {
+    it("should return correct output for case 1") {
+      val grid = Array(Array(0, 1), Array(1, 0))
+      val output = TreesAndGraphs.shortestPathBinaryMatrix(grid)
+      val expected = 2
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val grid = Array(Array(0,0,0),Array(1,1,0),Array(1,1,0))
+      val output = TreesAndGraphs.shortestPathBinaryMatrix(grid)
+      val expected = 4
+      assert(output == expected)
+    }
+    it("should return correct output for case 3") {
+      val grid = Array(Array(1,0,0),Array(1,1,0),Array(1,1,0))
+      val output = TreesAndGraphs.shortestPathBinaryMatrix(grid)
+      val expected = -1
+      assert(output == expected)
+    }
+    it("should return correct output for custom case") {
+      val grid = Array(Array(0,1,1,1,1,1,1,1),Array(0,1,1,0,0,0,0,0),Array(0,1,0,1,1,1,1,0),Array(0,1,0,1,1,1,1,0),Array(0,1,1,0,0,1,1,0),Array(0,1,1,1,1,0,1,0),Array(0,0,0,0,0,1,1,0),Array(1,1,1,1,1,1,1,0))
+      val output = TreesAndGraphs.shortestPathBinaryMatrix(grid)
+      val expected = 25
+      assert(output == expected)
+    }
+  }
 }
