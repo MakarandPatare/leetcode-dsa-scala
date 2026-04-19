@@ -531,15 +531,15 @@ object TreesAndGraphs {
     val directions = Array((-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1))
     val seen = Array.ofDim[Boolean](n, n)
     seen(0)(0) = true
-    
+
     case class State(row: Int, col: Int, steps: Int)
     val queue = mutable.Queue[State]()
     queue.enqueue(State(0, 0, 1))
-    
+
     def valid(row: Int, col: Int): Boolean = {
       0 <= row && row < n && 0 <= col && col < n && grid(row)(col) == 0
     }
-    
+
     while(queue.nonEmpty) {
       val State(row, col, steps) = queue.dequeue()
       if (row == n - 1 && col == n - 1) return steps
@@ -552,7 +552,41 @@ object TreesAndGraphs {
         }
       }
     }
-    
+
     -1
+  }
+  // https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/description/
+  def distanceK(root: TreeNode, target: TreeNode, k: Int): List[Int] = {
+    val parents = mutable.Map[TreeNode, TreeNode]()
+    def dfs(node: TreeNode, parent: TreeNode): Unit = {
+      if (node != null) {
+        parents(node) = parent
+        dfs(node.left, node)
+        dfs(node.right, node)
+      }
+    }
+    dfs(root, null)
+
+    val queue = mutable.Queue[TreeNode]()
+    // All node values are unique
+    val seen = mutable.Set[Int]()
+    seen += target.value
+    queue.enqueue(target)
+    var distance = 0
+
+    while (queue.nonEmpty && distance < k) {
+      for (_ <- queue.indices) {
+        val node = queue.dequeue()
+        for (neighbor <- Array(node.left, node.right, parents(node))) {
+          if (neighbor != null && !seen.contains(neighbor.value)) {
+            seen += neighbor.value
+            queue.enqueue(neighbor)
+          }
+        }
+      }
+      distance += 1
+    }
+    
+    queue.map(_.value).toList
   }
 }

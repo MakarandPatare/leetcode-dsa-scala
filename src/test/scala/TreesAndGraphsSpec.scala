@@ -774,4 +774,32 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("863. All Nodes Distance K in Binary Tree") {
+    it("should return correct output for case 1") {
+      // [3,5,1,6,2,0,8,null,null,7,4]
+      val root = TreeNode(3,
+        _left = TreeNode(5,
+          _left = TreeNode(6),
+          _right = TreeNode(2,
+            _left = TreeNode(7),
+            _right = TreeNode(4))),
+        _right = TreeNode(1,
+          _left = TreeNode(),
+          _right = TreeNode(8)))
+      val target = root.left
+      val k = 2
+      val output = TreesAndGraphs.distanceK(root, target, k)
+      val expected = List(7, 4, 1)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      // [1]
+      val root = TreeNode(1)
+      val target = root
+      val k = 3
+      val output = TreesAndGraphs.distanceK(root, target, k)
+      val expected = Nil
+      assert(output == expected)
+    }
+  }
 }
