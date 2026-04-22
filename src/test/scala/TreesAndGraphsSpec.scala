@@ -816,4 +816,20 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output === expected)
     }
   }
+  describe("1293. Shortest Path in a Grid with Obstacles Elimination") {
+    it("should return correct output for case 1") {
+      val grid = Array(Array(0, 0, 0), Array(1, 1, 0), Array(0, 0, 0), Array(0, 1, 1), Array(0, 0, 0))
+      val k = 1
+      val output = TreesAndGraphs.shortestPath(grid, k)
+      val expected = 6
+      assert(output === expected)
+    }
+    it("should return correct output for case 2") {
+      val grid = Array(Array(0, 1, 1), Array(1, 1, 1), Array(1, 0, 0))
+      val k = 1
+      val output = TreesAndGraphs.shortestPath(grid, k)
+      val expected = -1
+      assert(output === expected)
+    }
+  }
 }

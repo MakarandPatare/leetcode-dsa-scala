@@ -589,7 +589,7 @@ object TreesAndGraphs {
 
     queue.map(_.value).toList
   }
-  //
+  // https://leetcode.com/problems/01-matrix/description/
   def updateMatrix(mat: Array[Array[Int]]): Array[Array[Int]] = {
     val m = mat.length
     val n = mat(0).length
@@ -622,5 +622,38 @@ object TreesAndGraphs {
       }
     }
     mat
+  }
+
+  def shortestPath(grid: Array[Array[Int]], k: Int): Int = {
+    val m = grid.length
+    val n = grid(0).length
+    val directions = Array((0, 1), (1, 0), (0, -1), (-1, 0))
+    val seen = Array.ofDim[Boolean](m, n, k + 1)
+    case class State(row: Int, col: Int, remain: Int, steps: Int)
+    val queue = mutable.Queue[State]()
+    queue.enqueue(State(0, 0, k, 0))
+
+    def valid(row: Int, col: Int): Boolean = 0 <= row && row < m && 0 <= col && col < n
+
+    while(queue.nonEmpty) {
+      val State(row, col, remain, steps) = queue.dequeue()
+      if (row == m - 1 && col == n - 1) return steps
+      for ((dRow, dCol) <- directions) {
+        val nextRow = row + dRow
+        val nextCol = col + dCol
+        if (valid(nextRow, nextCol)) {
+          if (grid(nextRow)(nextCol) == 0) {
+            if (!seen(nextRow)(nextCol)(remain)) {
+              seen(nextRow)(nextCol)(remain) = true
+              queue.enqueue(State(nextRow, nextCol, remain, steps + 1))
+            }
+          } else if (remain > 0 && !seen(nextRow)(nextCol)(remain - 1)) {
+            seen(nextRow)(nextCol)(remain - 1) = true
+            queue.enqueue(State(nextRow, nextCol, remain - 1, steps + 1))
+          }
+        }
+      }
+    }
+    -1
   }
 }
