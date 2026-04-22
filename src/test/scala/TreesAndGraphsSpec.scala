@@ -802,4 +802,18 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("542. 01 Matrix") {
+    it("should return correct output for case 1") {
+      val mat = Array(Array(0, 0, 0), Array(0, 1, 0), Array(0, 0, 0))
+      val output = TreesAndGraphs.updateMatrix(mat)
+      val expected = Array(Array(0, 0, 0), Array(0, 1, 0), Array(0, 0, 0))
+      assert(output === expected)
+    }
+    it("should return correct output for case 2") {
+      val mat = Array(Array(0, 0, 0), Array(0, 1, 0), Array(1, 1, 1))
+      val output = TreesAndGraphs.updateMatrix(mat)
+      val expected = Array(Array(0, 0, 0), Array(0, 1, 0), Array(1, 2, 1))
+      assert(output === expected)
+    }
+  }
 }

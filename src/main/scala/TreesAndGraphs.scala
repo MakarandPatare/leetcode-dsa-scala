@@ -586,7 +586,41 @@ object TreesAndGraphs {
       }
       distance += 1
     }
-    
+
     queue.map(_.value).toList
+  }
+  //
+  def updateMatrix(mat: Array[Array[Int]]): Array[Array[Int]] = {
+    val m = mat.length
+    val n = mat(0).length
+    val seen = Array.ofDim[Boolean](m, n)
+    val directions = Array((0, 1), (1, 0), (0, -1), (-1, 0))
+    case class State(row: Int, col: Int, steps: Int)
+    val queue = mutable.Queue[State]()
+
+    def valid(row: Int, col: Int): Boolean = {
+      0 <= row && row < m && 0 <= col && col < n && mat(row)(col) == 1
+    }
+
+    for (row <- 0 until m; col <- 0 until n) {
+      if (mat(row)(col) == 0) {
+        queue.enqueue(State(row, col, 0))
+        seen(row)(col) = true
+      }
+    }
+
+    while (queue.nonEmpty) {
+      val State(row, col, steps) = queue.dequeue()
+      for ((dRow, dCol) <- directions) {
+        val newRow = row + dRow
+        val newCol = col + dCol
+        if (valid(newRow, newCol) && !seen(newRow)(newCol)) {
+          seen(newRow)(newCol) = true
+          queue.enqueue(State(newRow, newCol, steps + 1))
+          mat(newRow)(newCol) = steps + 1
+        }
+      }
+    }
+    mat
   }
 }
