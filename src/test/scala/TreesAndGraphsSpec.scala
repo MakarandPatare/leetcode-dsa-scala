@@ -881,4 +881,18 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("909. Snakes and Ladders") {
+    it("should return correct output for case 1") {
+      val board = Array(Array(-1,-1,-1,-1,-1,-1),Array(-1,-1,-1,-1,-1,-1),Array(-1,-1,-1,-1,-1,-1),Array(-1,35,-1,-1,13,-1),Array(-1,-1,-1,-1,-1,-1),Array(-1,15,-1,-1,-1,-1))
+      val expected = 4
+      val output = TreesAndGraphs.snakesAndLadders(board)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val board = Array(Array(-1,-1), Array(-1,3))
+      val expected = 1
+      val output = TreesAndGraphs.snakesAndLadders(board)
+      assert(output == expected)
+    }
+  }
 }

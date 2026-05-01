@@ -723,4 +723,37 @@ object TreesAndGraphs {
       -1
     }
   }
+  // https://leetcode.com/problems/snakes-and-ladders/description/
+  def snakesAndLadders(board: Array[Array[Int]]): Int = {
+    val n = board.length
+    val cells = new Array[(Int, Int)](n * n + 1)
+    var label = 1
+    var columns = (0 until n).toArray
+    // The cells precomputation is just a performance optimization.
+    // It avoids recomputing (row, col) for the same label multiple times during BFS.
+    for (row <- n - 1 to 0 by -1) {
+      for (col <- columns) {
+        cells(label) = (row, col)
+        label += 1
+      }
+      columns = columns.reverse
+    }
+    val dist = Array.fill(n * n + 1)(-1)
+    val queue = mutable.Queue[Int]()
+    dist(1) = 0
+    queue.enqueue(1)
+
+    while(queue.nonEmpty) {
+      val curr = queue.dequeue()
+      for (next <- curr + 1 to math.min(curr + 6, n * n)) {
+        val (row, col) = cells(next)
+        val destination = if (board(row)(col) != -1) board(row)(col) else next
+        if (dist(destination) == -1) {
+          dist(destination) = dist(curr) + 1
+          queue.enqueue(destination)
+        }
+      }
+    }
+    dist (n * n)
+  }
 }
