@@ -623,7 +623,7 @@ object TreesAndGraphs {
     }
     mat
   }
-
+  // https://leetcode.com/problems/shortest-path-with-alternating-colors/description/
   def shortestPath(grid: Array[Array[Int]], k: Int): Int = {
     val m = grid.length
     val n = grid(0).length
@@ -655,5 +655,39 @@ object TreesAndGraphs {
       }
     }
     -1
+  }
+  // https://leetcode.com/problems/shortest-path-with-alternating-colors/description/
+  def shortestAlternatingPaths(n: Int, redEdges: Array[Array[Int]], blueEdges: Array[Array[Int]]): Array[Int] = {
+    val RED = 0
+    val BLUE = 1
+    val graph = Array.fill(2)(Array.fill(n)(List[Int]()))
+    def addToGraph(color: Int, edges: Array[Array[Int]]): Unit = {
+      for (edge <- edges) {
+        val (x, y) = (edge(0), edge(1))
+        graph(color)(x) = y :: graph(color)(x)
+      }
+    }
+    addToGraph(RED, redEdges)
+    addToGraph(BLUE, blueEdges)
+    val ans = Array.fill(n)(Int.MaxValue)
+    val seen = Array.ofDim[Boolean](n, 2)
+    seen(0)(RED) = true
+    seen(0)(BLUE) = true
+    case class State(node: Int, color: Int, steps: Int)
+    val queue = mutable.Queue[State]()
+    queue.enqueue(State(0, RED, 0))
+    queue.enqueue(State(0, BLUE, 0))
+
+    while(queue.nonEmpty) {
+      val State(node, color, steps) = queue.dequeue()
+      ans(node) = math.min(ans(node), steps)
+      for (neighbor <- graph(color)(node)) {
+        if (!seen(neighbor)(1 - color)) {
+          seen(neighbor)(1 - color) = true
+          queue.enqueue(State(neighbor, 1 - color, steps + 1))
+        }
+      }
+    }
+    ans.map(v => if (v == Int.MaxValue) -1 else v)
   }
 }

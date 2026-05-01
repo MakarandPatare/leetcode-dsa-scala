@@ -832,4 +832,30 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output === expected)
     }
   }
+  describe("1129. Shortest Path with Alternating Colors") {
+    it("should return correct output for case 1") {
+      val n = 3
+      val redEdges = Array(Array(0, 1), Array(1, 2))
+      val blueEdges = Array.empty[Array[Int]]()
+      val expected = Array(0, 1, -1)
+      val output = TreesAndGraphs.shortestAlternatingPaths(n, redEdges, blueEdges)
+      assert(output === expected)
+    }
+    it("should return correct output for case 2") {
+      val n = 3
+      val redEdges = Array(Array(0, 1))
+      val blueEdges = Array(Array(2, 1))
+      val expected = Array(0, 1, -1)
+      val output = TreesAndGraphs.shortestAlternatingPaths(n, redEdges, blueEdges)
+      assert(output === expected)
+    }
+    it("should return correct output for custom case from discussion thread") {
+      val n = 5
+      val redEdges = Array(Array(0, 1), Array(1, 2), Array(2, 3), Array(3, 4))
+      val blueEdges = Array(Array(1, 2), Array(2, 3), Array(3, 1))
+      val expected = Array(0, 1, 2, 3, 7)
+      val output = TreesAndGraphs.shortestAlternatingPaths(n, redEdges, blueEdges)
+      assert(output === expected)
+    }
+  }
 }
