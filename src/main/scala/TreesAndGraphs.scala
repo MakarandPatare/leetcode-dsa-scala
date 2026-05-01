@@ -1,4 +1,6 @@
 import scala.collection.mutable
+import scala.util.boundary
+import scala.util.boundary.break
 
 object TreesAndGraphs {
   case class TreeNode(_value: Int = 0, _left: TreeNode = null, _right: TreeNode = null) {
@@ -689,5 +691,36 @@ object TreesAndGraphs {
       }
     }
     ans.map(v => if (v == Int.MaxValue) -1 else v)
+  }
+  // https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/description/
+  def nearestExit(maze: Array[Array[Char]], entrance: Array[Int]): Int = {
+    val rows = maze.length
+    val cols = maze(0).length
+    val directions = Array((0, 1), (0, -1), (1, 0), (-1, 0))
+    val startRow = entrance(0)
+    val startCol = entrance(1)
+    maze(startRow)(startCol) = '+'
+
+    case class State(row: Int, col: Int, steps: Int)
+    val queue = mutable.Queue[State]()
+    queue.enqueue(State(startRow, startCol, 0))
+
+    boundary {
+      while(queue.nonEmpty) {
+        val State(row, col, steps) = queue.dequeue()
+        for ((dRow, dCol) <- directions) {
+          val nextRow = row + dRow
+          val nextCol = col + dCol
+          if (0 <= nextRow && nextRow < rows && 0 <= nextCol && nextCol < cols && maze(nextRow)(nextCol) == '.') {
+            if (nextRow == 0 || nextRow == rows - 1 || nextCol == 0 || nextCol == cols - 1) {
+              break(steps + 1)
+            }
+            maze(nextRow)(nextCol) = '+'
+            queue.enqueue(State(nextRow, nextCol, steps + 1))
+          }
+        }
+      }
+      -1
+    }
   }
 }

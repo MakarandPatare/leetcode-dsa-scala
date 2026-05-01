@@ -858,4 +858,27 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output === expected)
     }
   }
+  describe("1926. Nearest Exit from Entrance in Maze") {
+    it("should return correct output for case 1") {
+      val maze = Array(Array('+','+','.','+'),Array('.','.','.','+'),Array('+','+','+','.'))
+      val entrance = Array(1, 2)
+      val expected = 1
+      val output = TreesAndGraphs.nearestExit(maze, entrance)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val maze = Array(Array('+','+','+'), Array('.','.','.'), Array('+','+','+'))
+      val entrance = Array(1, 0)
+      val expected = 2
+      val output = TreesAndGraphs.nearestExit(maze, entrance)
+      assert(output == expected)
+    }
+    it("should return correct output for case 3") {
+      val maze = Array(Array('.','+'))
+      val entrance = Array(0, 0)
+      val expected = -1
+      val output = TreesAndGraphs.nearestExit(maze, entrance)
+      assert(output == expected)
+    }
+  }
 }
