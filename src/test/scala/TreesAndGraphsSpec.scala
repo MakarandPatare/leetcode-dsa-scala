@@ -895,4 +895,42 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("752. Open the Lock") {
+    it("should return correct output for case 1") {
+      val deadends = Array("0201", "0101", "0102", "1212", "2002")
+      val target = "0202"
+      val expected = 6
+      val output = TreesAndGraphs.openLock(deadends, target)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val deadends = Array("8888")
+      val target = "0009"
+      val expected = 1
+      val output = TreesAndGraphs.openLock(deadends, target)
+      assert(output == expected)
+    }
+    it("should return -1 when target is unreachable") {
+      val deadends = Array("8887", "8889", "8878", "8898", "8788", "8988", "7888", "9888")
+      val target = "8888"
+      val expected = -1
+      val output = TreesAndGraphs.openLock(deadends, target)
+      assert(output == expected)
+    }
+    it("should return -1 when 0000 is a deadend") {
+      val deadends = Array("0000")
+      val target = "9999"
+      val expected = -1
+      val output = TreesAndGraphs.openLock(deadends, target)
+      assert(output == expected)
+    }
+    it("should return 0 when target is 0000") {
+      val deadends = Array("1234")
+      val target = "0000"
+      val expected = 0
+      val output = TreesAndGraphs.openLock(deadends, target)
+      assert(output == expected)
+    }
+  }
+
 }

@@ -756,4 +756,40 @@ object TreesAndGraphs {
     }
     dist (n * n)
   }
+
+  def openLock(deadends: Array[String], target: String): Int = {
+    val seen = mutable.Set[String]()
+    boundary {
+      for (deadend <- deadends) {
+        if (deadend == "0000") boundary.break(-1)
+        seen += deadend
+      }
+
+      def neighbors(node: String): List[String] = {
+        (for {
+          i <- 0 until 4
+          num = node.charAt(i) - '0'
+          change <- List(1, -1)
+          x = (num + change + 10) % 10
+        } yield node.updated(i, ('0' + x).toChar)).toList
+      }
+
+      case class State(node: String, steps: Int)
+      val queue = mutable.Queue[State]()
+      queue.enqueue(State("0000", 0))
+      seen += "0000"
+
+      while(queue.nonEmpty) {
+        val State(node, steps) = queue.dequeue()
+        if (node == target) boundary.break(steps)
+        for (neighbor <- neighbors(node)) {
+          if (!seen.contains(neighbor)) {
+            seen += neighbor
+            queue.enqueue(State(neighbor, steps + 1))
+          }
+        }
+      }
+      -1
+    }
+  }
 }
