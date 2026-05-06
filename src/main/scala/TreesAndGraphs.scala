@@ -792,4 +792,38 @@ object TreesAndGraphs {
       -1
     }
   }
+  // https://leetcode.com/problems/evaluate-division/description/
+  def calcEquation(equations: List[List[String]], values: Array[Double], queries: List[List[String]]): Array[Double] = {
+    case class Pair(node: String, ratio: Double)
+    val graph = mutable.Map[String, mutable.Map[String, Double]]()
+    for ((eq, value) <- equations.zip(values)) {
+      val (numerator, denominator) = (eq.head, eq(1))
+      graph.getOrElseUpdate(numerator, mutable.Map[String, Double]())(denominator) = value
+      graph.getOrElseUpdate(denominator, mutable.Map[String, Double]())(numerator) = 1.0 / value
+    }
+    
+    def answerQuery(start: String, end: String): Double = {
+      boundary {
+        if (!graph.contains(start)) boundary.break(-1.0)
+        val seen = mutable.Set[String]()
+        val stack = mutable.Stack[Pair]()
+        seen += start
+        stack.push(Pair(start, 1.0))
+        while (stack.nonEmpty) {
+          val Pair(node, ratio) = stack.pop()
+          if (node == end) boundary.break(ratio)
+          if (graph.contains(node)) {
+            for (neighbor <- graph(node).keys) {
+              if (!seen.contains(neighbor)) {
+                seen += neighbor
+                stack.push(Pair(neighbor, ratio * graph(node)(neighbor)))
+              }
+            }
+          }
+        }
+        -1
+      }
+    }
+    queries.map(q => answerQuery(q.head, q.tail.head)).toArray
+  }
 }

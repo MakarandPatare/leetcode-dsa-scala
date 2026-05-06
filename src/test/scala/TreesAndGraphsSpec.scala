@@ -932,5 +932,31 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
+  describe("399. Evaluate Division") {
+    it("should return correct output for case 1") {
+      val equations = List(List("a", "b"), List("b", "c"))
+      val values = Array(2.0, 3.0)
+      val queries = List(List("a", "c"), List("b", "a"), List("a", "e"), List("a", "a"), List("x", "x"))
+      val expected = Array(6.0, 0.5, -1.0, 1.0, -1.0)
+      val output = TreesAndGraphs.calcEquation(equations, values, queries)
+      assert(output === expected)
+    }
+    it("should return correct output for case 2") {
+      val equations = List(List("a", "b"), List("b", "c"), List("bc", "cd"))
+      val values = Array(1.5, 2.5, 5.0)
+      val queries = List(List("a", "c"), List("c", "b"), List("bc", "cd"), List("cd", "bc"))
+      val expected = Array(3.75, 0.4, 5.0, 0.2)
+      val output = TreesAndGraphs.calcEquation(equations, values, queries)
+      assert(output === expected)
+    }
+    it("should return correct output for case 3") {
+      val equations = List(List("a", "b"))
+      val values = Array(0.5)
+      val queries = List(List("a", "b"), List("b", "a"), List("a", "c"), List("x", "y"))
+      val expected = Array(0.5, 2.0, -1.0, -1.0)
+      val output = TreesAndGraphs.calcEquation(equations, values, queries)
+      assert(output === expected)
+    }    
+  }
 
 }
