@@ -992,5 +992,36 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
   }
-
+  describe("1306. Jump Game III") {
+    it("should return true for case 1") {
+      val arr = Array(4, 2, 3, 0, 3, 1, 2)
+      val start = 5
+      val output = TreesAndGraphs.canReach(arr, start)
+      assert(output == true)
+    }
+    it("should return true for case 2") {
+      val arr = Array(4, 2, 3, 0, 3, 1, 2)
+      val start = 0
+      val output = TreesAndGraphs.canReach(arr, start)
+      assert(output == true)
+    }
+    it("should return false for case 3") {
+      val arr = Array(3, 0, 2, 1, 2)
+      val start = 2
+      val output = TreesAndGraphs.canReach(arr, start)
+      assert(output == false)
+    }
+    it("should return true when start index already has value 0") {
+      val arr = Array(0, 1, 2)
+      val start = 0
+      val output = TreesAndGraphs.canReach(arr, start)
+      assert(output == true)
+    }
+    it("should return false for single element array with no zero") {
+      val arr = Array(1)
+      val start = 0
+      val output = TreesAndGraphs.canReach(arr, start)
+      assert(output == false)
+    }
+  }
 }

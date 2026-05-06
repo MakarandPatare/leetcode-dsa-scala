@@ -852,4 +852,12 @@ object TreesAndGraphs {
       -1
     }
   }
+  // https://leetcode.com/problems/jump-game-iii/description/
+  def canReach(arr: Array[Int], start: Int): Boolean = {
+    if (start >= 0 && start < arr.length && arr(start) >= 0) {
+      if (arr(start) == 0) return true
+      arr(start) = -arr(start) // In real life, better to use a different data structure
+      canReach(arr, start + arr(start)) || canReach(arr, start - arr(start))
+    } else false
+  }
 }
