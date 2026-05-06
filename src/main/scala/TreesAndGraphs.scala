@@ -826,4 +826,30 @@ object TreesAndGraphs {
     }
     queries.map(q => answerQuery(q.head, q.tail.head)).toArray
   }
+  // https://leetcode.com/problems/minimum-genetic-mutation/description/
+  def minMutation(startGene: String, endGene: String, bank: Array[String]): Int = {
+    val bankSet = bank.toSet
+    val queue = mutable.Queue[String]()
+    val seen = mutable.Set[String]()
+    queue.enqueue(startGene)
+    seen += startGene
+    var steps = 0
+    boundary {
+      while (queue.nonEmpty) {
+        for (_ <- queue.indices) {
+          val node = queue.dequeue()
+          if (node == endGene) boundary.break(steps)
+          for (c <- Array('A', 'C', 'G', 'T'); i <- node.indices) {
+            val neighbor = node.substring(0, i) + c + node.substring(i + 1)
+            if (!seen.contains(neighbor) && bankSet.contains(neighbor)) {
+              queue.enqueue(neighbor)
+              seen += neighbor
+            }
+          }
+        }
+        steps += 1
+      }
+      -1
+    }
+  }
 }

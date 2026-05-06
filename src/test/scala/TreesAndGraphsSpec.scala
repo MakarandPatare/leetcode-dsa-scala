@@ -958,5 +958,39 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output === expected)
     }    
   }
+  describe("433. Minimum Genetic Mutation") {
+    it("should return correct output for case 1") {
+      val startGene = "AACCGGTT"
+      val endGene = "AACCGGTA"
+      val bank = Array("AACCGGTA")
+      val expected = 1
+      val output = TreesAndGraphs.minMutation(startGene, endGene, bank)
+      assert(output == expected)
+    }
+    it("should return correct output for case 2") {
+      val startGene = "AACCGGTT"
+      val endGene = "AAACGGTA"
+      val bank = Array("AACCGGTA", "AACCGCTA", "AAACGGTA")
+      val expected = 2
+      val output = TreesAndGraphs.minMutation(startGene, endGene, bank)
+      assert(output == expected)
+    }
+    it("should return -1 when mutation is impossible") {
+      val startGene = "AAAAACCC"
+      val endGene = "AACCCCCC"
+      val bank = Array("AAAACCCC", "AAACCCCC", "AACCCCCC")
+      val expected = 3
+      val output = TreesAndGraphs.minMutation(startGene, endGene, bank)
+      assert(output == expected)
+    }
+    it("should return -1 when end gene not in bank") {
+      val startGene = "AACCGGTT"
+      val endGene = "AACCGGTA"
+      val bank = Array("AACCGGTS")
+      val expected = -1
+      val output = TreesAndGraphs.minMutation(startGene, endGene, bank)
+      assert(output == expected)
+    }
+  }
 
 }
