@@ -1024,4 +1024,36 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == false)
     }
   }
+  describe("2101. Detonate the Maximum Bombs") {
+    it("should return 2 for case 1") {
+      val bombs = Array(Array(2, 1, 3), Array(6, 1, 4))
+      val expected = 2
+      val output = TreesAndGraphs.maximumDetonation(bombs)
+      assert(output == expected)
+    }
+    it("should return 1 for case 2") {
+      val bombs = Array(Array(1, 1, 5), Array(10, 10, 5))
+      val expected = 1
+      val output = TreesAndGraphs.maximumDetonation(bombs)
+      assert(output == expected)
+    }
+    it("should return 5 for case 3") {
+      val bombs = Array(Array(1, 2, 3), Array(2, 3, 1), Array(3, 4, 2), Array(4, 5, 3), Array(5, 6, 4))
+      val expected = 5
+      val output = TreesAndGraphs.maximumDetonation(bombs)
+      assert(output == expected)
+    }
+    it("should return 1 for single bomb") {
+      val bombs = Array(Array(0, 0, 1))
+      val expected = 1
+      val output = TreesAndGraphs.maximumDetonation(bombs)
+      assert(output == expected)
+    }
+    it("should return 3 for large coordinate case") {
+      val bombs = Array(Array(56, 80, 2), Array(55, 9, 10), Array(32, 75, 2), Array(87, 89, 1), Array(61, 94, 3), Array(43, 82, 9), Array(17, 100, 6), Array(50, 6, 7), Array(9, 66, 7), Array(98, 3, 6), Array(67, 50, 2), Array(79, 39, 5), Array(92, 60, 10), Array(49, 9, 9), Array(42, 32, 10))
+      val expected = 3
+      val output = TreesAndGraphs.maximumDetonation(bombs)
+      assert(output == expected)
+    }
+  }
 }

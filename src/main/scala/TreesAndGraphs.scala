@@ -856,8 +856,30 @@ object TreesAndGraphs {
   def canReach(arr: Array[Int], start: Int): Boolean = {
     if (start >= 0 && start < arr.length && arr(start) >= 0) {
       if (arr(start) == 0) return true
-      arr(start) = -arr(start) // In real life, better to use a different data structure
+      arr(start) = -arr(start) // In real life, better to not mutate input DS
       canReach(arr, start + arr(start)) || canReach(arr, start - arr(start))
     } else false
+  }
+  // https://leetcode.com/problems/detonate-the-maximum-bombs/description/
+  def maximumDetonation(bombs: Array[Array[Int]]): Int = {
+    val n = bombs.length
+    val graph = mutable.Map[Int, mutable.ArrayBuffer[Int]]()
+    for (i <- 0 until n) graph(i) = mutable.ArrayBuffer[Int]()
+    
+    //Build the graph
+    for (i <- 0 until n; j <- 0 until n if i != j) {
+      val (xi, yi, ri) = (bombs(i)(0).toLong, bombs(i)(1).toLong, bombs(i)(2).toLong)
+      val (xj, yj) = (bombs(j)(0).toLong, bombs(j)(1).toLong)
+      if (ri * ri >= (xi - xj) * (xi - xj) + (yi - yj) * (yi - yj))
+        graph(i) += j
+    }
+    
+    def dfs(cur: Int, visited: mutable.Set[Int]): Int = {
+      if (visited.contains(cur)) return 0
+      visited += cur
+      1 + graph(cur).map(dfs(_, visited)).sum
+    }
+
+    (0 until n).map(i => dfs(i, mutable.Set[Int]())).max
   }
 }
