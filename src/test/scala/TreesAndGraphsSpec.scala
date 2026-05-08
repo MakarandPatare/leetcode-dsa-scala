@@ -132,9 +132,9 @@ class TreesAndGraphsSpec extends AnyFunSpec {
     }
     it("should return correct output for case 2") {
       val input = TreeNode(3,
-          _left = TreeNode(3,
-            _left = TreeNode(4),
-            _right = TreeNode(2)))
+        _left = TreeNode(3,
+          _left = TreeNode(4),
+          _right = TreeNode(2)))
       val expected = 3
       val output = TreesAndGraphs.goodNodes(input)
       assert(output == expected)
@@ -288,7 +288,7 @@ class TreesAndGraphsSpec extends AnyFunSpec {
           _right = TreeNode(5)),
         _right = TreeNode(3,
           _right = TreeNode(4)))
-      val expected = List(1,3,4)
+      val expected = List(1, 3, 4)
       val output = TreesAndGraphs.rightSideView(input)
       assert(output == expected)
     }
@@ -299,14 +299,14 @@ class TreesAndGraphsSpec extends AnyFunSpec {
           _left = TreeNode(4,
             _left = TreeNode(5))),
         _right = TreeNode(3))
-      val expected = List(1,3,4,5)
+      val expected = List(1, 3, 4, 5)
       val output = TreesAndGraphs.rightSideView(input)
       assert(output == expected)
     }
     it("Should return correct output for case 3") {
       // [1,null,3]
       val input = TreeNode(1,
-          _right = TreeNode(3))
+        _right = TreeNode(3))
       val expected = List(1, 3)
       val output = TreesAndGraphs.rightSideView(input)
       assert(output == expected)
@@ -323,12 +323,12 @@ class TreesAndGraphsSpec extends AnyFunSpec {
     it("should return correct output for case 1") {
       // [1,3,2,5,3,null,9]
       val input = TreeNode(1,
-      _left = TreeNode(3,
-        _left = TreeNode(5),
-        _right = TreeNode(3)),
+        _left = TreeNode(3,
+          _left = TreeNode(5),
+          _right = TreeNode(3)),
         _right = TreeNode(2,
           _right = TreeNode(9)))
-      val expected = List(1,3,9)
+      val expected = List(1, 3, 9)
       val output = TreesAndGraphs.largestValues(input)
       assert(output == expected)
     }
@@ -577,13 +577,13 @@ class TreesAndGraphsSpec extends AnyFunSpec {
   }
   describe("547. Number of Provinces") {
     it("should return correct output for case 1") {
-      val input = Array(Array(1,1,0), Array(1,1,0), Array(0,0,1))
+      val input = Array(Array(1, 1, 0), Array(1, 1, 0), Array(0, 0, 1))
       val output = TreesAndGraphs.findCircleNum(input)
       val expected = 2
       assert(output == expected)
     }
     it("should return correct output for case 2") {
-      val input = Array(Array(1,0,0), Array(0,1,0), Array(0,0,1))
+      val input = Array(Array(1, 0, 0), Array(0, 1, 0), Array(0, 0, 1))
       val output = TreesAndGraphs.findCircleNum(input)
       val expected = 3
       assert(output == expected)
@@ -606,10 +606,10 @@ class TreesAndGraphsSpec extends AnyFunSpec {
   describe("200. Number of Islands") {
     it("should return correct output for case 1") {
       val input = Array(
-        Array('1','1','1','1','0'),
-        Array('1','1','0','1','0'),
-        Array('1','1','0','0','0'),
-        Array('0','0','0','0','0')
+        Array('1', '1', '1', '1', '0'),
+        Array('1', '1', '0', '1', '0'),
+        Array('1', '1', '0', '0', '0'),
+        Array('0', '0', '0', '0', '0')
       )
       val output = TreesAndGraphs.numIslands(input)
       val expected = 1
@@ -617,10 +617,10 @@ class TreesAndGraphsSpec extends AnyFunSpec {
     }
     it("should return correct output for case 2") {
       val input = Array(
-        Array('1','1','0','0','0'),
-        Array('1','1','0','0','0'),
-        Array('0','0','1','0','0'),
-        Array('0','0','0','1','1')
+        Array('1', '1', '0', '0', '0'),
+        Array('1', '1', '0', '0', '0'),
+        Array('0', '0', '1', '0', '0'),
+        Array('0', '0', '0', '1', '1')
       )
       val output = TreesAndGraphs.numIslands(input)
       val expected = 3
@@ -630,21 +630,21 @@ class TreesAndGraphsSpec extends AnyFunSpec {
   describe("1466. Reorder Routes to Make All Paths Lead to the City Zero") {
     it("should return correct output for case 1") {
       val n = 6
-      val connections = Array(Array(0,1), Array(1,3), Array(2,3), Array(4,0), Array(4,5))
+      val connections = Array(Array(0, 1), Array(1, 3), Array(2, 3), Array(4, 0), Array(4, 5))
       val output = TreesAndGraphs.minReorder(n, connections)
       val expected = 3
       assert(output == expected)
     }
     it("should return correct output for case 2") {
       val n = 5
-      val connections = Array(Array(1,0), Array(1,2), Array(3,2), Array(3,4))
+      val connections = Array(Array(1, 0), Array(1, 2), Array(3, 2), Array(3, 4))
       val output = TreesAndGraphs.minReorder(n, connections)
       val expected = 2
       assert(output == expected)
     }
     it("should return correct output for case 3") {
       val n = 3
-      val connections = Array(Array(1,0), Array(2,0))
+      val connections = Array(Array(1, 0), Array(2, 0))
       val output = TreesAndGraphs.minReorder(n, connections)
       val expected = 0
       assert(output == expected)
@@ -667,14 +667,14 @@ class TreesAndGraphsSpec extends AnyFunSpec {
   describe("1557. Minimum Number of Vertices to Reach All Nodes") {
     it("should return correct output for case 1") {
       val n = 6
-      val edges = List(List(0,1), List(0,2), List(2,5), List(3,4), List(4,2))
+      val edges = List(List(0, 1), List(0, 2), List(2, 5), List(3, 4), List(4, 2))
       val output = TreesAndGraphs.findSmallestSetOfVertices(n, edges)
       val expected = List(0, 3)
       assert(output == expected)
     }
     it("should return correct output for case 2") {
       val n = 5
-      val edges = List(List(0,1), List(2,1), List(3,1), List(1,4), List(2,4))
+      val edges = List(List(0, 1), List(2, 1), List(3, 1), List(1, 4), List(2, 4))
       val output = TreesAndGraphs.findSmallestSetOfVertices(n, edges)
       val expected = List(0, 2, 3)
       assert(output == expected)
@@ -718,13 +718,13 @@ class TreesAndGraphsSpec extends AnyFunSpec {
   }
   describe("695. Max Area of Island") {
     it("should return correct output for case 1") {
-      val grid = Array(Array(0,0,1,0,0,0,0,1,0,0,0,0,0),Array(0,0,0,0,0,0,0,1,1,1,0,0,0),Array(0,1,1,0,1,0,0,0,0,0,0,0,0),Array(0,1,0,0,1,1,0,0,1,0,1,0,0),Array(0,1,0,0,1,1,0,0,1,1,1,0,0),Array(0,0,0,0,0,0,0,0,0,0,1,0,0),Array(0,0,0,0,0,0,0,1,1,1,0,0,0),Array(0,0,0,0,0,0,0,1,1,0,0,0,0))
+      val grid = Array(Array(0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0), Array(0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0), Array(0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0), Array(0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0), Array(0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0), Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0), Array(0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0), Array(0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0))
       val output = TreesAndGraphs.maxAreaOfIsland(grid)
       val expected = 6
       assert(output == expected)
     }
     it("should return correct output for case 2") {
-      val grid = Array(Array(0,0,0,0,0,0,0,0))
+      val grid = Array(Array(0, 0, 0, 0, 0, 0, 0, 0))
       val output = TreesAndGraphs.maxAreaOfIsland(grid)
       val expected = 0
       assert(output == expected)
@@ -756,19 +756,19 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       assert(output == expected)
     }
     it("should return correct output for case 2") {
-      val grid = Array(Array(0,0,0),Array(1,1,0),Array(1,1,0))
+      val grid = Array(Array(0, 0, 0), Array(1, 1, 0), Array(1, 1, 0))
       val output = TreesAndGraphs.shortestPathBinaryMatrix(grid)
       val expected = 4
       assert(output == expected)
     }
     it("should return correct output for case 3") {
-      val grid = Array(Array(1,0,0),Array(1,1,0),Array(1,1,0))
+      val grid = Array(Array(1, 0, 0), Array(1, 1, 0), Array(1, 1, 0))
       val output = TreesAndGraphs.shortestPathBinaryMatrix(grid)
       val expected = -1
       assert(output == expected)
     }
     it("should return correct output for custom case") {
-      val grid = Array(Array(0,1,1,1,1,1,1,1),Array(0,1,1,0,0,0,0,0),Array(0,1,0,1,1,1,1,0),Array(0,1,0,1,1,1,1,0),Array(0,1,1,0,0,1,1,0),Array(0,1,1,1,1,0,1,0),Array(0,0,0,0,0,1,1,0),Array(1,1,1,1,1,1,1,0))
+      val grid = Array(Array(0, 1, 1, 1, 1, 1, 1, 1), Array(0, 1, 1, 0, 0, 0, 0, 0), Array(0, 1, 0, 1, 1, 1, 1, 0), Array(0, 1, 0, 1, 1, 1, 1, 0), Array(0, 1, 1, 0, 0, 1, 1, 0), Array(0, 1, 1, 1, 1, 0, 1, 0), Array(0, 0, 0, 0, 0, 1, 1, 0), Array(1, 1, 1, 1, 1, 1, 1, 0))
       val output = TreesAndGraphs.shortestPathBinaryMatrix(grid)
       val expected = 25
       assert(output == expected)
@@ -860,21 +860,21 @@ class TreesAndGraphsSpec extends AnyFunSpec {
   }
   describe("1926. Nearest Exit from Entrance in Maze") {
     it("should return correct output for case 1") {
-      val maze = Array(Array('+','+','.','+'),Array('.','.','.','+'),Array('+','+','+','.'))
+      val maze = Array(Array('+', '+', '.', '+'), Array('.', '.', '.', '+'), Array('+', '+', '+', '.'))
       val entrance = Array(1, 2)
       val expected = 1
       val output = TreesAndGraphs.nearestExit(maze, entrance)
       assert(output == expected)
     }
     it("should return correct output for case 2") {
-      val maze = Array(Array('+','+','+'), Array('.','.','.'), Array('+','+','+'))
+      val maze = Array(Array('+', '+', '+'), Array('.', '.', '.'), Array('+', '+', '+'))
       val entrance = Array(1, 0)
       val expected = 2
       val output = TreesAndGraphs.nearestExit(maze, entrance)
       assert(output == expected)
     }
     it("should return correct output for case 3") {
-      val maze = Array(Array('.','+'))
+      val maze = Array(Array('.', '+'))
       val entrance = Array(0, 0)
       val expected = -1
       val output = TreesAndGraphs.nearestExit(maze, entrance)
@@ -883,13 +883,13 @@ class TreesAndGraphsSpec extends AnyFunSpec {
   }
   describe("909. Snakes and Ladders") {
     it("should return correct output for case 1") {
-      val board = Array(Array(-1,-1,-1,-1,-1,-1),Array(-1,-1,-1,-1,-1,-1),Array(-1,-1,-1,-1,-1,-1),Array(-1,35,-1,-1,13,-1),Array(-1,-1,-1,-1,-1,-1),Array(-1,15,-1,-1,-1,-1))
+      val board = Array(Array(-1, -1, -1, -1, -1, -1), Array(-1, -1, -1, -1, -1, -1), Array(-1, -1, -1, -1, -1, -1), Array(-1, 35, -1, -1, 13, -1), Array(-1, -1, -1, -1, -1, -1), Array(-1, 15, -1, -1, -1, -1))
       val expected = 4
       val output = TreesAndGraphs.snakesAndLadders(board)
       assert(output == expected)
     }
     it("should return correct output for case 2") {
-      val board = Array(Array(-1,-1), Array(-1,3))
+      val board = Array(Array(-1, -1), Array(-1, 3))
       val expected = 1
       val output = TreesAndGraphs.snakesAndLadders(board)
       assert(output == expected)
@@ -956,7 +956,7 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       val expected = Array(0.5, 2.0, -1.0, -1.0)
       val output = TreesAndGraphs.calcEquation(equations, values, queries)
       assert(output === expected)
-    }    
+    }
   }
   describe("433. Minimum Genetic Mutation") {
     it("should return correct output for case 1") {
@@ -997,31 +997,31 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       val arr = Array(4, 2, 3, 0, 3, 1, 2)
       val start = 5
       val output = TreesAndGraphs.canReach(arr, start)
-      assert(output == true)
+      assert(output)
     }
     it("should return true for case 2") {
       val arr = Array(4, 2, 3, 0, 3, 1, 2)
       val start = 0
       val output = TreesAndGraphs.canReach(arr, start)
-      assert(output == true)
+      assert(output)
     }
     it("should return false for case 3") {
       val arr = Array(3, 0, 2, 1, 2)
       val start = 2
       val output = TreesAndGraphs.canReach(arr, start)
-      assert(output == false)
+      assert(!output)
     }
     it("should return true when start index already has value 0") {
       val arr = Array(0, 1, 2)
       val start = 0
       val output = TreesAndGraphs.canReach(arr, start)
-      assert(output == true)
+      assert(output)
     }
     it("should return false for single element array with no zero") {
       val arr = Array(1)
       val start = 0
       val output = TreesAndGraphs.canReach(arr, start)
-      assert(output == false)
+      assert(!output)
     }
   }
   describe("2101. Detonate the Maximum Bombs") {
@@ -1053,6 +1053,64 @@ class TreesAndGraphsSpec extends AnyFunSpec {
       val bombs = Array(Array(56, 80, 2), Array(55, 9, 10), Array(32, 75, 2), Array(87, 89, 1), Array(61, 94, 3), Array(43, 82, 9), Array(17, 100, 6), Array(50, 6, 7), Array(9, 66, 7), Array(98, 3, 6), Array(67, 50, 2), Array(79, 39, 5), Array(92, 60, 10), Array(49, 9, 9), Array(42, 32, 10))
       val expected = 3
       val output = TreesAndGraphs.maximumDetonation(bombs)
+      assert(output == expected)
+    }
+  }
+  describe("127. Word Ladder") {
+    it("should return correct output for case 1") {
+      val beginWord = "hit"
+      val endWord = "cog"
+      val wordList = List("hot", "dot", "dog", "lot", "log", "cog")
+      val expected = 5
+      val output = TreesAndGraphs.ladderLength(beginWord, endWord, wordList)
+      assert(output == expected)
+    }
+    it("should return 0 when endWord is not in wordList") {
+      val beginWord = "hit"
+      val endWord = "cog"
+      val wordList = List("hot", "dot", "dog", "lot", "log")
+      val expected = 0
+      val output = TreesAndGraphs.ladderLength(beginWord, endWord, wordList)
+      assert(output == expected)
+    }
+    it("should return 2 when beginWord and endWord differ by one letter") {
+      val beginWord = "hot"
+      val endWord = "dot"
+      val wordList = List("dot", "dog", "lot", "log")
+      val expected = 2
+      val output = TreesAndGraphs.ladderLength(beginWord, endWord, wordList)
+      assert(output == expected)
+    }
+    it("should return 0 when no transformation sequence exists") {
+      val beginWord = "hit"
+      val endWord = "xyz"
+      val wordList = List("hot", "dot", "dog", "lot", "log", "xyz")
+      val expected = 0
+      val output = TreesAndGraphs.ladderLength(beginWord, endWord, wordList)
+      assert(output == expected)
+    }
+    it("should return 0 for empty wordList") {
+      val beginWord = "hit"
+      val endWord = "cog"
+      val wordList = List.empty[String]
+      val expected = 0
+      val output = TreesAndGraphs.ladderLength(beginWord, endWord, wordList)
+      assert(output == expected)
+    }
+    it("should return 2 when beginWord transforms directly to endWord") {
+      val beginWord = "abc"
+      val endWord = "abd"
+      val wordList = List("abd")
+      val expected = 2
+      val output = TreesAndGraphs.ladderLength(beginWord, endWord, wordList)
+      assert(output == expected)
+    }
+    it("should return 0 when beginWord equals endWord but endWord not in wordList") {
+      val beginWord = "hot"
+      val endWord = "hot"
+      val wordList = List("dot", "dog")
+      val expected = 0
+      val output = TreesAndGraphs.ladderLength(beginWord, endWord, wordList)
       assert(output == expected)
     }
   }

@@ -882,4 +882,41 @@ object TreesAndGraphs {
 
     (0 until n).map(i => dfs(i, mutable.Set[Int]())).max
   }
+
+  // https://leetcode.com/problems/word-ladder/description/
+  // Possible to solve this using Bi-directional BFS to reduce time complexity by half
+  def ladderLength(beginWord: String, endWord: String, wordList: List[String]): Int = {
+    if (!wordList.contains(endWord)) return 0
+    val l = beginWord.length
+    
+    val allComboDict = mutable.Map[String, mutable.ArrayBuffer[String]]()
+    wordList.foreach {
+      word => for (i <- 0 until l) {
+        val newWord = word.substring(0, i) + '*' + word.substring(i + 1, l)
+        allComboDict.getOrElseUpdate(newWord, mutable.ArrayBuffer[String]()) += word
+      }
+    }
+    
+    val queue = mutable.Queue[(String, Int)]()
+    val seen = mutable.Set[String]()
+    queue.enqueue((beginWord, 1))
+    seen += beginWord
+    
+    boundary {
+      while (queue.nonEmpty) {
+        val (word, level) = queue.dequeue()
+        for (i <- 0 until l) {
+          val newWord = word.substring(0, i) + '*' + word.substring(i + 1, l)
+          for (adjacentWord <- allComboDict.getOrElse(newWord, Nil)) {
+            if (adjacentWord == endWord) boundary.break(level + 1)
+            if (!seen.contains(adjacentWord)) {
+              seen += adjacentWord
+              queue.enqueue((adjacentWord, level + 1))
+            }
+          }
+        }
+      }
+      0
+    }
+  }
 }
