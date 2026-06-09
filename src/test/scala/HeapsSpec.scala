@@ -27,4 +27,24 @@ class HeapsSpec extends AnyFunSpec {
       assert(Heaps.lastStoneWeight(Array(1000, 1000, 999)) == 999)
     }
   }
+  describe("2208. Minimum Operations to Halve Array Sum") {
+    it("example 1 - nums [5,19,8,1] should return 3") {
+      assert(Heaps.halveArray(Array(5, 19, 8, 1)) == 3)
+    }
+    it("example 2 - nums [3,8,20] should return 3") {
+      assert(Heaps.halveArray(Array(3, 8, 20)) == 3)
+    }
+    it("single element array") {
+      assert(Heaps.halveArray(Array(10)) == 1)
+    }
+    it("two equal elements") {
+      assert(Heaps.halveArray(Array(4, 4)) == 2)
+    }
+    it("all equal large elements") {
+      assert(Heaps.halveArray(Array(8, 8, 8, 8)) == 4)
+    }
+    it("single operation needed") {
+      assert(Heaps.halveArray(Array(1)) == 1)
+    }
+  }
 }

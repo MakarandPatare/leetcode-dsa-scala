@@ -10,4 +10,22 @@ object Heaps {
     }
     if (heap.isEmpty) 0 else heap.dequeue()
   }
+  // https://leetcode.com/problems/minimum-operations-to-halve-array-sum/description/
+  def halveArray(nums: Array[Int]): Int = {
+    val heap = mutable.PriorityQueue[Double]()
+    var target: Double = 0
+    nums.foreach(num =>
+      target += num
+      heap.enqueue(num)
+    )
+    target /= 2
+    var ans = 0
+    while(target > 0) {
+      ans += 1
+      val maxHalf = heap.dequeue() / 2
+      target -= maxHalf
+      heap.enqueue(maxHalf)
+    }
+    ans
+  }
 }
