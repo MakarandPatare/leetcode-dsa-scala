@@ -47,4 +47,21 @@ class HeapsSpec extends AnyFunSpec {
       assert(Heaps.halveArray(Array(1)) == 1)
     }
   }
+  describe("1962. Remove Stones to Minimize the Total") {
+    it("example 1 - piles [5,4,9], k = 2 should return 12") {
+      assert(Heaps.minStoneSum(Array(5, 4, 9), 2) == 12)
+    }
+    it("example 2 - piles [4,3,6,7], k = 3 should return 12") {
+      assert(Heaps.minStoneSum(Array(4, 3, 6, 7), 3) == 12)
+    }
+    it("no operations (k = 0) returns original sum") {
+      assert(Heaps.minStoneSum(Array(2, 2, 3), 0) == 7)
+    }
+    it("single small pile with many operations remains 1") {
+      assert(Heaps.minStoneSum(Array(1), 100) == 1)
+    }
+    it("large equal piles with several ops") {
+      assert(Heaps.minStoneSum(Array(1000, 1000, 1000), 5) == 1000)
+    }
+  }
 }

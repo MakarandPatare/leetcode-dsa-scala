@@ -28,4 +28,29 @@ object Heaps {
     }
     ans
   }
+  // https://leetcode.com/problems/find-median-from-data-stream/description/
+  // No tests for this problem
+  object MedianFinder {
+    val maxHeap: mutable.PriorityQueue[Int] = mutable.PriorityQueue()
+    val minHeap: mutable.PriorityQueue[Int] = mutable.PriorityQueue.empty(Ordering.Int.reverse)
+
+    def addNum(num: Int): Unit = {
+      maxHeap.enqueue(num)
+      minHeap.enqueue(maxHeap.dequeue())
+      if (minHeap.size > maxHeap.size) {
+        maxHeap.enqueue(minHeap.dequeue())
+      }
+    }
+    def findMedian(): Double = {
+      if (maxHeap.size > minHeap.size) maxHeap.head
+      else (minHeap.head + maxHeap.head) / 2.0
+    }
+  }
+  // https://leetcode.com/problems/remove-stones-to-minimize-the-total/editorial/
+  def minStoneSum(piles: Array[Int], k: Int): Int = {
+    val maxHeap = mutable.PriorityQueue[Double]()
+    piles.foreach(maxHeap.enqueue(_))
+    for (_ <- 0 until k) maxHeap.enqueue(math.ceil(maxHeap.dequeue() / 2))
+    maxHeap.sum.toInt
+  }
 }
