@@ -53,4 +53,16 @@ object Heaps {
     for (_ <- 0 until k) maxHeap.enqueue(math.ceil(maxHeap.dequeue() / 2))
     maxHeap.sum.toInt
   }
+  // https://leetcode.com/problems/top-k-frequent-elements/description/
+  def topKFrequent(nums: Array[Int], k: Int): Array[Int] = {
+    val counts = mutable.Map[Int, Int]()
+    nums.foreach(n => counts.update(n, counts.getOrElse(n, 0) + 1))
+    val ord: Ordering[Int] = Ordering.by[Int, Int](n => -counts.getOrElse(n, 0))
+    val minHeap = mutable.PriorityQueue.empty[Int](ord)
+    counts.keys.foreach { ck =>
+      minHeap.enqueue(ck)
+      if (minHeap.size > k) minHeap.dequeue()
+    }
+    minHeap.toArray
+  }
 }

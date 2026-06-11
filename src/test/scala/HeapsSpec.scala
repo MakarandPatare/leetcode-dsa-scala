@@ -64,4 +64,27 @@ class HeapsSpec extends AnyFunSpec {
       assert(Heaps.minStoneSum(Array(1000, 1000, 1000), 5) == 1000)
     }
   }
+  describe("347. Top K Frequent Elements") {
+    it("example - nums [1,1,1,2,2,3], k = 2 should return {1,2}") {
+      val res = Heaps.topKFrequent(Array(1, 1, 1, 2, 2, 3), 2)
+      assert(res.toSet == Set(1, 2))
+    }
+    it("single element array") {
+      val res = Heaps.topKFrequent(Array(42), 1)
+      assert(res.toSet == Set(42))
+    }
+    it("all unique elements with k = number of uniques") {
+      val res = Heaps.topKFrequent(Array(4, 5, 6), 3)
+      assert(res.toSet == Set(4, 5, 6))
+    }
+    it("negative numbers") {
+      val res = Heaps.topKFrequent(Array(-1, -1, -2, -2, -3), 2)
+      assert(res.toSet == Set(-1, -2))
+    }
+    it("tie case - any k elements from top frequency candidates are valid") {
+      val res = Heaps.topKFrequent(Array(1, 2, 3, 2, 3, 1), 2)
+      // frequencies: 1,2,3 all appear twice -> any two of {1,2,3} are valid
+      assert(res.length == 2 && res.toSet.subsetOf(Set(1, 2, 3)))
+    }
+  }
 }
