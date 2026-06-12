@@ -87,4 +87,26 @@ class HeapsSpec extends AnyFunSpec {
       assert(res.length == 2 && res.toSet.subsetOf(Set(1, 2, 3)))
     }
   }
+  describe("658. Find K Closest Elements") {
+    it("example 1 - arr [1,2,3,4,5], k = 4, x = 3 should return [1,2,3,4]") {
+      val res = Heaps.findClosestElements(Array(1, 2, 3, 4, 5), 4, 3)
+      assert(res == List(1, 2, 3, 4))
+    }
+    it("example 2 - arr [1,2,3,4,5], k = 4, x = -1 should return [1,2,3,4]") {
+      val res = Heaps.findClosestElements(Array(1, 2, 3, 4, 5), 4, -1)
+      assert(res == List(1, 2, 3, 4))
+    }
+    it("single element array returns that element") {
+      val res = Heaps.findClosestElements(Array(1), 1, 100)
+      assert(res == List(1))
+    }
+    it("tie-break smaller first when distances equal") {
+      val res = Heaps.findClosestElements(Array(1, 2, 3, 4, 5), 2, 3)
+      assert(res == List(2, 3))
+    }
+    it("k equals array length returns whole array") {
+      val res = Heaps.findClosestElements(Array(1, 2, 3), 3, 2)
+      assert(res == List(1, 2, 3))
+    }
+  }
 }

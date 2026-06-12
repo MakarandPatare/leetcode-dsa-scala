@@ -65,4 +65,16 @@ object Heaps {
     }
     minHeap.toArray
   }
+  // https://leetcode.com/problems/find-k-closest-elements/description/
+  def findClosestElements(arr: Array[Int], k: Int, x: Int): List[Int] = {
+    // tuple-based ordering. Tuple = (distance, value).
+    // When distances are equal, the second element `n` is compared
+    val ord: Ordering[Int] = Ordering.by[Int, (Int, Int)](n => (Math.abs(n - x), n))
+    val heap = mutable.PriorityQueue.empty[Int](ord)
+    arr.foreach{ a =>
+      heap.enqueue(a)
+      if (heap.size > k) heap.dequeue()
+    }
+    heap.toList.sorted
+  }
 }
