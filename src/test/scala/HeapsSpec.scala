@@ -109,4 +109,24 @@ class HeapsSpec extends AnyFunSpec {
       assert(res == List(1, 2, 3))
     }
   }
+  describe("215. Kth Largest Element in an Array") {
+    it("example 1 - nums [3,2,1,5,6,4], k = 2 should return 5") {
+      assert(Heaps.findKthLargest(Array(3, 2, 1, 5, 6, 4), 2) == 5)
+    }
+    it("example 2 - nums [3,2,3,1,2,4,5,5,6], k = 4 should return 4") {
+      assert(Heaps.findKthLargest(Array(3, 2, 3, 1, 2, 4, 5, 5, 6), 4) == 4)
+    }
+    it("single element array returns that element") {
+      assert(Heaps.findKthLargest(Array(42), 1) == 42)
+    }
+    it("all duplicates returns the same value") {
+      assert(Heaps.findKthLargest(Array(1, 1, 1, 1), 2) == 1)
+    }
+    it("negative numbers and k = 1 returns max (least negative)") {
+      assert(Heaps.findKthLargest(Array(-4, -1, -3, -2), 1) == -1)
+    }
+    it("k equals array length returns minimum element") {
+      assert(Heaps.findKthLargest(Array(7, 10, 4), 3) == 4)
+    }
+  }
 }

@@ -77,4 +77,13 @@ object Heaps {
     }
     heap.toList.sorted
   }
+  // https://leetcode.com/problems/kth-largest-element-in-an-array/description/
+  def findKthLargest(nums: Array[Int], k: Int): Int = {
+    val heap = mutable.PriorityQueue.empty[Int]((a, b) => b - a)
+    nums.foreach { n =>
+      heap.enqueue(n)
+      if (heap.size > k) heap.dequeue()
+    }
+    heap.head
+  }
 }
