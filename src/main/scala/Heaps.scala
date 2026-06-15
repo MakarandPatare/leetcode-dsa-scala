@@ -95,4 +95,17 @@ object Heaps {
     }
     heap.toArray
   }
+  // https://leetcode.com/problems/kth-largest-element-in-a-stream/description/
+  // No tests for this problem
+  class KthLargest(_k: Int, _nums: Array[Int]) {
+    private val heap = scala.collection.mutable.PriorityQueue.empty[Int](Ordering.Int.reverse)
+    _nums.foreach(add)
+    def add(`val`: Int): Int = {
+      if (heap.size < _k || heap.head < `val`) {
+        heap.enqueue(`val`)
+        if (heap.size > _k) heap.dequeue()
+      }
+      heap.head
+    }
+  }
 }
