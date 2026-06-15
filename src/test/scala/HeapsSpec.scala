@@ -129,4 +129,35 @@ class HeapsSpec extends AnyFunSpec {
       assert(Heaps.findKthLargest(Array(7, 10, 4), 3) == 4)
     }
   }
+  describe("973. K Closest Points to Origin") {
+    it("example 1 - points [[1,3],[-2,2]], k = 1 should return [[-2,2]]") {
+      val res = Heaps.kClosest(Array(Array(1, 3), Array(-2, 2)), 1)
+      assert(res.map(_.toList).toSet == Set(List(-2, 2)))
+    }
+    it("example 2 - points [[3,3],[5,-1],[-2,4]], k = 2 should return [[3,3],[-2,4]]") {
+      val res = Heaps.kClosest(Array(Array(3, 3), Array(5, -1), Array(-2, 4)), 2)
+      assert(res.map(_.toList).toSet == Set(List(3, 3), List(-2, 4)))
+    }
+    it("k equals number of points returns all points") {
+      val pts = Array(Array(2, -1), Array(-2, 2), Array(0, 0))
+      val res = Heaps.kClosest(pts, pts.length)
+      assert(res.map(_.toList).toSet == pts.map(_.toList).toSet)
+    }
+    it("zero coordinates chosen when closest") {
+      val res = Heaps.kClosest(Array(Array(0, 0), Array(-1, -1), Array(2, 2)), 1)
+      assert(res.map(_.toList).toSet == Set(List(0, 0)))
+    }
+    it("tie distances - any valid closest points (order not enforced)") {
+      val pts = Array(Array(1, 0), Array(-1, 0), Array(0, 1), Array(0, -1))
+      val res = Heaps.kClosest(pts, 2)
+      val allowed = Set(List(1, 0), List(-1, 0), List(0, 1), List(0, -1))
+      assert(res.length == 2 && res.map(_.toList).toSet.subsetOf(allowed))
+    }
+    it("handles negative and larger coordinates") {
+      val pts = Array(Array(-5, -4), Array(3, 4), Array(1, 1), Array(2, 2))
+      val res = Heaps.kClosest(pts, 2)
+      val allowed = Set(List(2, 2), List(1, 1))
+      assert(res.length == 2 && res.map(_.toList).toSet.subsetOf(allowed))
+    }
+  }
 }

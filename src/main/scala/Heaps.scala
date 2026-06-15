@@ -86,4 +86,13 @@ object Heaps {
     }
     heap.head
   }
+  // https://leetcode.com/problems/k-closest-points-to-origin/description/
+  def kClosest(points: Array[Array[Int]], k: Int): Array[Array[Int]] = {
+    val heap = scala.collection.mutable.PriorityQueue.empty[Array[Int]]((a, b) => (a(0) * a(0) + a(1) * a(1)) - (b(0) * b(0) + b(1) * b(1)))
+    points.foreach { p =>
+      heap.enqueue(p)
+      if (heap.size > k) heap.dequeue()
+    }
+    heap.toArray
+  }
 }
